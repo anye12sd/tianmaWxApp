@@ -1,0 +1,83 @@
+var getOrderType = function (type) {
+  var status
+  switch (type) {
+    case 1:
+      status = "固定租赁"
+      break;
+    case 2:
+      status = "动态租赁"
+      break;
+    case 3:
+      status = "国内快递"
+      break;
+    case 4:
+      status = "网络货运"
+      break;
+    case 5:
+      status = "国际海运"
+      break;
+    case 6:
+      status = "国际空运"
+      break;
+    case 7:
+      status = "国际铁路"
+      break;
+    case 8:
+      status = "国内陆路"
+      break;
+    case 9:
+      status = "报关"
+      break;
+    default:
+      status = "其它"
+  }
+  return status
+}
+
+var timeFormat = function(val){
+  var time
+  var timeArray = val.split("T")
+  time = timeArray[0] + " " + timeArray[1]
+  time = time.substring(0,time.length-5)
+  return time
+}
+
+var getorderListIcon = function (type) {
+  var status
+  switch (type) {
+    case 1:
+      status = "../../img/icon_02.png"
+      break;
+    case 2:
+      status = "../../img/icon_01.png"
+      break;
+    case 3:
+      status = "../../img/icon_03.png"
+      break;
+    case 4:
+      status = "../../img/icon_04.png"
+      break;
+    case 5:
+      status = "../../img/icon_05.png"
+      break;
+    case 6:
+      status = "../../img/icon_08.png"
+      break;
+    case 7:
+      status = "../../img/icon_06.png"
+      break;
+    case 8:
+      status = "../../img/icon_07.png"
+      break;
+    case 9:
+      status = "../../img/icon_11.png"
+      break;
+  }
+  return status
+}
+
+module.exports = {
+  getOrderType: getOrderType,
+  timeFormat: timeFormat,
+  getorderListIcon: getorderListIcon
+}

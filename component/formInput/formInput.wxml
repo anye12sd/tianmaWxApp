@@ -1,0 +1,31 @@
+<!--pages/form-input/formInput.wxml-->
+<block wx:if="{{dataList.isInput}}">
+  <view class="input-box flex">
+    <view class="input-box-label flex-1">{{dataList.label}}</view>
+    <view class="input-right-box flex-1">
+      <image src="../../img/sami-select.png" class="button-sami" bindtap="amountChange" data-operate="sami"></image>
+        <input type="number" class="input-right-input" placeholder-style="color:#000" placeholder="{{dataList.placeholder}}" value="{{deliverAmount}}" bindinput="setDeliverAmount"/>
+      <image src="../../img/add-select.png" class="button-add" bindtap="amountChange" data-operate="add"></image>
+    </view>
+  </view>
+</block>
+<block wx:elif="{{dataList.isRadio}}">
+  <view class="input-box flex">
+    <view class="input-box-label flex-1">{{dataList.label}}</view>
+    <view class="input-right-box flex-1 input-right-radio-box">
+      <radio value="r1" checked="{{radioChecked}}" color="#376ee8" class="input-right-radio" bindtap="toggleRadioCheck"/>
+    </view>
+  </view>
+</block>
+<block wx:else="{{dataList.isSelect}}">
+  <view class="input-box flex">
+      <view class="input-box-label flex-1">{{dataList.label}}</view>
+      <view class="input-right-box flex-1">
+        <picker bindchange="bindPickerChange" value="{{selectIndex}}" range="{{selectArray}}"  range-key="value">
+          <view class="picker">
+            {{selectArray[selectIndex].value}}
+          </view>
+        </picker>
+      </view>
+    </view>
+</block>

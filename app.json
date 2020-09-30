@@ -1,0 +1,71 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/domesticExpress/domesticExpress",
+    
+    "pages/articleList/articleList",
+    "pages/article/article",
+    
+    "pages/feedback/feedback",
+    "pages/home/home",
+    "pages/orderList/orderList",
+    "pages/orderDetail/orderDetail",
+    "pages/login/login",
+    
+    "pages/netExpress/netExpress",
+    "pages/dynamicLease/dynamicLease",
+    "pages/staticLease/staticLease",
+    "pages/location/location",
+    "pages/checkedPrice/checkedPrice",
+    "pages/addressBook/addressBook",
+    "pages/addressEdit/addressEdit",
+    "pages/declaration/declaration",
+    "pages/seaFreight/seaFreight",
+    "pages/domesticLand/domesticLand",
+    "pages/railway/railway",
+    "pages/airFreight/airFreight",
+    "pages/logs/logs"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#f9f9f9"
+  },
+  "tabBar": {
+    "selectedColor": "#376ee8",
+    "color": "#ccc",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "img/home-fill.png",
+        "iconPath": "img/home.png",  
+        "text": "快捷查询"
+      },
+      {
+        "pagePath": "pages/articleList/articleList",
+        "selectedIconPath": "img/earth-fill.png",
+        "iconPath": "img/earth.png",  
+        "text": "服务介绍"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "selectedIconPath": "img/account-fill.png",
+        "iconPath": "img/account.png",  
+        "text": "个人中心"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

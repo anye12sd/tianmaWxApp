@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="input-form" wx:for="{{addressList}}" wx:key="index">
+    <view class="orderNo-box boxshadow2">
+      <view class="orderNo">
+        编号：000000000000
+      </view>
+      <view class="order-detail flex">
+        <view class="order-detail-image">
+          <image src="../../img/icon_05.png"></image>
+        </view>
+        <view class="order-detail-text">
+          <view>
+            <text>国际海运</text>
+          </view>
+          <view class="checkTime">
+            <text>询价时间：2019-19-19</text>
+          </view>
+        </view>
+      </view>
+      <view class="check-price-box flex flex-wrap">
+        <view class="check-price-text">
+          <text>预估费用</text>
+        </view>
+        <view class="check-price">
+          <text>¥ --</text>
+        </view>
+      </view>
+      <view class="checked-price-box flex flex-wrap">
+        <view class="checked-price-text">
+          <text>已确认费用</text>
+        </view>
+        <view class="checked-price">
+          <text>¥ --</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

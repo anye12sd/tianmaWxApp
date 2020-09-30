@@ -1,0 +1,31 @@
+<!--pages/addressBook/addressBook.wxml-->
+<view class="container" id="container">
+  <view class="input-search-box">
+    <image src="../../img/icon_19.png"></image>
+    <input type="text" placeholder="请输入姓名/联系方式/地址进行搜索" class="input-search" value="{{searchValue}}" bindinput="updateValue" confirm-type="search" bindconfirm="search"/>
+  </view>
+  <view class="input-form" wx:for="{{addressList}}" wx:key="index">
+    <view class="address-book-box flex flex-wrap">
+      <view class="flex-left flex-1" bindtap="chooseAddress" data-item="{{item}}">
+        <view class="left-box">
+          <text class="name">{{item.real_name}}</text>
+          <text class="phone">{{item.mobile}}</text>
+          <text class="defaultLabel" wx:if="{{item.is_default}}" data-addressId="{{item.id}}">默认</text>
+        </view>
+        <view class="address">
+          {{item.province}} {{item.city}} {{item.district}} {{item.address}}
+        </view>
+      </view>
+      <view class="flex-btn" bindtap="toEditAddress" data-item="{{item}}">
+        <view class="btn-box">
+          <view class="verticalDevider"></view>
+          <text>编辑</text> 
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{noMore}}" class="loading-tip">没有更多了</view>
+  <view class="addNewAddress">
+    <text bindtap="toEditAddress">创建新地址</text>
+  </view>
+</view>

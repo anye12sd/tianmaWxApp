@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "formInput": "../../component/formInput/formInput",
+    "priceEntry": "../../component/priceEntry/priceEntry"
+  },
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "固定租赁",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

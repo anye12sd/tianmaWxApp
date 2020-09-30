@@ -1,0 +1,17 @@
+<!--component/priceEntry/priceEntry.wxml-->
+<view class="flex">
+  <view class="flex-1 show-price">
+    <view class="show-price-box">
+      <text class="show-price-text">预估费用：</text>
+      <text class="show-price-content">￥{{priceItem.totalPrice}}</text>
+    </view>
+    <text class="explain">{{priceItem.text}}</text>
+  </view>
+  <view>
+    <button wx:if="{{hasPhoneNum}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="order-btn">询价</button>
+    <block wx:else>
+      <view wx:if="{{priceItem.showOrderBtn}}" class="order-btn" bindtap="order">下单</view>
+      <view wx:else class="order-btn" bindtap="getOrderPrice">询价</view>
+    </block>
+  </view>
+</view>

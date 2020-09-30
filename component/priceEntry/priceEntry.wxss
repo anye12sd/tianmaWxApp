@@ -1,0 +1,38 @@
+/* component/priceEntry/priceEntry.wxss */
+.flex{
+  display: flex
+}
+.flex-1{
+  flex: 1
+}
+.show-price{
+  font-size: 28rpx;
+}
+.show-price-box{
+  position: absolute;
+  padding-top: 40rpx;
+}
+.show-price-content{
+  color: #376ee8;
+}
+.explain{
+  position: absolute;
+  padding-top: 85rpx;
+  font-size: 24rpx;
+  color: #969696
+}
+.order-btn{
+  position: absolute;
+  margin-top: 35rpx;
+  width: 130rpx !important;
+  right:40rpx;
+  text-align: center;
+  height: 80rpx !important;
+  line-height: 80rpx !important;
+  color:#fff;
+  background: #376ee8;
+  border-radius: 8rpx;
+  padding: 0 !important;
+  font-weight: normal !important;
+  font-size: 30rpx !important;
+}

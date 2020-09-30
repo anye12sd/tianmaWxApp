@@ -1,0 +1,91 @@
+/* component/locationSelect/locationSelect.wxss */
+.flex{
+  display: flex
+}
+.flex-1{
+  flex: 1
+}
+.flex-wrap{
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between
+}
+.content{
+  padding:0 60rpx;
+  background: #fff;
+  padding-top: 20rpx;
+  padding-bottom: 40rpx;
+}
+.header{
+  padding:0 60rpx;
+  padding-top: 40rpx;
+  background: #fff;
+  height:60rpx;
+  position: relative;
+}
+.header image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.header image::before{
+  content: "";
+  position: absolute;
+  top:70rpx;
+  left: calc(50% + 60rpx);
+  width: 120rpx;
+  height:1rpx;
+  border-top: 1px solid #e5e5e5
+}
+.header image::after{
+  content: "";
+  position: absolute;
+  top:70rpx;
+  right: calc(50% + 60rpx);
+  width: 120rpx;
+  height:1rpx;
+  border-top: 1px solid #e5e5e5
+}
+.header-text{
+  line-height: 60rpx;
+  color: #969696;
+  font-size: 28rpx;
+}
+.input-left-box{
+  text-align: left;
+  position: relative;
+}
+.input-right-box{
+  position: relative;
+  text-align: right;
+}
+.input-right-box:nth-child(2){
+  margin-right: 30rpx;
+}
+.input-right-box::after{
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 0 2px 2px 0;
+  border-color: #666;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 13rpx;
+  right: -30rpx
+}
+.input-left-box::after{
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 0 2px 2px 0;
+  border-color: #666;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 13rpx;
+  right: -30rpx
+}

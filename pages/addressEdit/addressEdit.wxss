@@ -1,0 +1,58 @@
+/* pages/addressEdit/addressEdit.wxss */
+@import '../../component/model/model.wxss';
+
+page {
+  height: 100%;
+}
+
+.container {
+  background: #f9f9f9;
+  height: 100%;
+}
+
+.input-address-box {
+  padding: 40rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+
+.input-address-label {
+  width: 200rpx
+}
+
+.infoText-placeholder {
+  color: #777
+}
+
+.addNewAddress {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  position: fixed;
+  bottom: 0;
+  height: 80rpx;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #e5e5e5;
+  z-index: 0
+}
+
+.addNewAddress text {
+  font-size: 32rpx;
+  color: #fff;
+  background: #376ee8;
+  display: block;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 8rpx;
+  width: 100%;
+}
+
+.switchClass {
+  line-height: 64rpx;
+}
+
+.input-address-textarea {
+  height: 100rpx
+}

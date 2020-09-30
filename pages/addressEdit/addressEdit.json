@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "formInput": "../../component/formInput/formInput"
+  },
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "新增地址",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

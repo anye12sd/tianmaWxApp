@@ -1,0 +1,37 @@
+<!--pages/location/location.wxml-->
+<view class="container" bindtap="hideList">
+  <view class="input-search-box">
+    <image src="../../img/icon_19.png"></image>
+    <input type="text" placeholder="请输入城市名称查询" class="input-search" value="{{searchValue}}" bindinput="updateValue"
+      confirm-type="search" bindconfirm="search" />
+    <view class="city-list-box" wx:if="{{showList}}">
+      <block wx:for="{{cityList}}" wx:key="index">
+        <view class="city-list" data-city="{{item.name}}" bindtap="selectCity">{{item.name}}</view>
+      </block>
+    </view>
+  </view>
+  <view class="location-city">
+    <view class="title">当前定位</view>
+    <view class="flex flex-wrap">
+      <view class="location-city-name" data-city="{{location}}" bindtap="selectCity">{{location}}</view>
+      <view class="reLocation" bindtap="getAuth">重新定位</view>
+    </view>
+  </view>
+  <view class="hot-select-city">
+    <view class="title">热门城市</view>
+    <view class="hot-select-box flex flex-wrap">
+      <view class="hot-city" data-city="上海市" bindtap="selectCity">上海市</view>
+      <view class="hot-city" data-city="杭州市" bindtap="selectCity">杭州市</view>
+      <view class="hot-city" data-city="重庆市" bindtap="selectCity">重庆市</view>
+      <view class="hot-city" data-city="北京市" bindtap="selectCity">北京市</view>
+      <view class="hot-city" data-city="武汉市" bindtap="selectCity">武汉市</view>
+      <view class="hot-city" data-city="广州市" bindtap="selectCity">广州市</view>
+      <view class="hot-city" data-city="海口市" bindtap="selectCity">海口市</view>
+      <view class="hot-city" data-city="成都市" bindtap="selectCity">成都市</view>
+      <view class="hot-city" data-city="南京市" bindtap="selectCity">南京市</view>
+      <view class="hot-city" data-city="南通市" bindtap="selectCity">南通市</view>
+      <view class="hot-city" data-city="长沙市" bindtap="selectCity">长沙市</view>
+      <view class="hot-city" data-city="西安市" bindtap="selectCity">西安市</view>
+    </view>
+  </view>
+</view>

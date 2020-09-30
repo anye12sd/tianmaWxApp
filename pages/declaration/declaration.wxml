@@ -1,0 +1,13 @@
+<!--pages/seaFreight/seaFreight.wxml-->
+<view class="container">
+  <view class="input-form">
+    <formInput dataList="{{AmountList}}" bind:getValue="getAmount"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{addressList}}" selectArray="{{addressArray}}" bind:getSelectValue="getSelectValue"></formInput>
+  </view>
+  <view class="price-box">
+    <priceEntry priceItem="{{priceItem}}" hasPhoneNum="{{hasPhoneNum}}" bind:order="order" bind:getOrderPrice="getOrderPrice"></priceEntry>
+  </view>
+  <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+</view>
+

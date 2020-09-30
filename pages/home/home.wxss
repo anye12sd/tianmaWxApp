@@ -1,0 +1,104 @@
+/* pages/home/home.wxss */
+.container{
+  background: #f9f9f9;
+}
+.home-header{
+  width: 100%;
+  height: 300rpx;
+  position: relative;
+}
+.home-image{
+  width: 100%;
+  height: 100%;
+}
+.home-info-box{
+  position: absolute;
+  top: 88rpx;
+  left: 70rpx
+}
+.home-info-avater{
+  width: 120rpx;
+  height: 120rpx;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 160rpx;
+}
+.home-info-avater image{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+.home-info-username{
+  position: absolute;
+  top:36rpx;
+  left: 140rpx;
+  width: 100%;
+}
+.login-btn{
+  color: #fff;
+  font-size: 28rpx;
+  padding: 0; 
+  background: transparent;
+  width:120rpx !important;
+}
+.home-info-username text{
+  color: #fff;
+  font-size: 28rpx;
+}
+.home-content-box{
+  padding: 0 45rpx;
+  padding-bottom: 100rpx;
+}
+.home-content{
+  background: #fff;
+  margin-top: 50rpx;
+  border-radius: 16rpx;
+}
+.home-content-list{
+  height: 140rpx;
+  line-height: 140rpx;
+}
+.home-content-list-image{
+  width: 150rpx;
+}
+.home-content-list-image image{
+  width: 70rpx;
+  height: 70rpx;
+  margin-left: 55rpx;
+  margin-top: 40rpx;
+}
+.home-content-list .home-content-list-content{
+  font-size: 28rpx;
+  border-bottom:1px solid #e5e5e5;
+  position: relative;
+}
+.home-content-list .home-content-list-content::after{
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 2px 2px 0 0;
+  border-color: #969696;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  right: 40rpx;
+  top: 64rpx;
+}
+.home-content-box .home-content .home-content-list:nth-last-child(1) .home-content-list-content{
+  border-bottom: none;
+}
+.service-button{
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  font-size: 28rpx;
+  font-weight: normal;
+  display: inline-block;
+  height: 140rpx;
+  line-height: 140rpx;
+  width: 100% !important;
+  background: transparent;
+}

@@ -1,0 +1,14 @@
+{
+  "component": true,
+  "usingComponents": {
+    "formInput": "../../component/formInput/formInput",
+    "locationSelect": "../../component/locationSelect/locationSelect",
+    "addresser": "../../component/addresser/addresser",
+    "priceEntry": "../../component/priceEntry/priceEntry"
+  },
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "国内快递",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

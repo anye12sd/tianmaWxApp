@@ -1,0 +1,104 @@
+<!--index.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+    <form-list></form-list>
+  </view>
+</view> -->
+<view class="container">
+  <image src="../../img/index_background.png" class="index-background"></image>
+  <view>
+    <view class="location-box flex">
+      <view class="flex-1 textl">
+        <image src="../../img/icon_09.png" class="loaction-image"></image>
+        <text bindtap="toSelectCity" wx:if="{{hasLocationAuth}}">{{location}}</text>
+        <text bindtap="getAuth" wx:else>{{location}}</text>
+      </view>
+      <view class="flex-1 textr">
+        <image src="../../img/icon_10.png" class="service-image"></image>
+        <button open-type="contact" class="service-button">
+          <text>在线客服</text>
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class="swiper-box">
+    <view class="page-section page-section-spacing swiper">
+      <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{currentSwiper}}"
+        bindchange="swiperChange">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item">
+              <image src="{{item.url}}" class="swiper-img"></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{background}}" wx:key="*this">
+          <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view>
+    <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">临时登录按钮</button> -->
+    <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">临时获取手机按钮</button> -->
+  </view>
+  <view class="deliver-item-box flex flex-wrap">
+    <view class="deliver-item" bindtap="toPage" data-page="staticLease">
+      <image src="../../img/icon_02.png"></image>
+      <view>固定租赁</view>
+    </view>
+    <view class="deliver-item" bindtap="toPage" data-page="dynamicLease">
+      <image src="../../img/icon_01.png"></image>
+      <view>动态租赁</view>
+    </view>
+    <view class="deliver-item" bindtap="toPage" data-page="domesticExpress">
+      <image src="../../img/icon_03.png"></image>
+      <view>国内快递</view>
+    </view>
+    <view class="deliver-item" bindtap="toPage" data-page="netExpress">
+      <image src="../../img/icon_04.png"></image>
+      <view>网络货运</view>
+    </view>
+  </view>
+  <view class="deliver-way-box flex flex-wrap">
+    <view class="deliver-way" bindtap="toPage" data-page="seaFreight">
+      <view class="deliver-way-text">
+        <image src="../../img/icon_05.png"></image> 国际海运
+      </view>
+      <view class="deliver-way-subText">Ocean Freight</view>
+    </view>
+    <view class="deliver-way" bindtap="toPage" data-page="railway">
+      <view class="deliver-way-text" bindtap="toPages">
+        <image src="../../img/icon_06.png"></image> 国际铁路
+      </view>
+      <view class="deliver-way-subText">Railway Transportation</view>
+    </view>
+    <view class="deliver-way" bindtap="toPage" data-page="airFreight">
+      <view class="deliver-way-text" bindtap="toPages">
+        <image src="../../img/icon_08.png"></image> 国际空运
+      </view>
+      <view class="deliver-way-subText">Air Freight</view>
+    </view>
+    <view class="deliver-way" bindtap="toPage" data-page="domesticLand">
+      <view class="deliver-way-text">
+        <image src="../../img/icon_07.png"></image> 国内陆运
+      </view>
+      <view class="deliver-way-subText">Domestic land route</view>
+    </view>
+    <view class="deliver-way flex-basis deliver-way-last" bindtap="toPage" data-page="declaration">
+      <view class="deliver-way-text">报关</view>
+      <view class="deliver-way-subText">Ocean Freight</view>
+      <image src="../../img/icon_11.png"></image>
+    </view>
+  </view>
+</view>

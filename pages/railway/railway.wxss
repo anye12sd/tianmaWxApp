@@ -1,0 +1,5 @@
+/* pages/seaFreight/seaFreight.wxss */
+.container{
+  background: #f9f9f9;
+  padding-bottom: 260rpx;
+}

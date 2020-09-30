@@ -1,0 +1,15 @@
+/* pages/staticLease/staticLease.wxss */
+page{
+  height: 100%;
+  background: #f9f9f9;
+}
+.container{
+  height: 100%;
+  background: #f9f9f9;
+}
+.explain{
+  color: #969696;
+  padding:0 60rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}

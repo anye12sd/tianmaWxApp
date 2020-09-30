@@ -1,0 +1,20 @@
+<!--pages/articleList/articleList.wxml-->
+<view class="container">
+  <view class="article-box">
+    <view class="article-children-title-box boxshadow2" wx:if="{{articleChildrenList.length}}">
+      <view class="article-children-title">{{currentItem.title}}的产品介绍</view>
+      <block wx:for="{{articleChildrenList}}" wx:key="index">
+      <view class="article-children-content" data-id="{{item.id}}" bindtap="toChildrenArticle">
+        {{item.title}}
+      </view>
+      </block>
+    </view>
+    <view class="article-content boxshadow2">
+      <view class="article-children-title">关于{{currentItem.title}}</view>
+      <view class="article">
+        <rich-text nodes="{{currentItem.content}}">
+        </rich-text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+/* pages/seaFreight/seaFreight.wxss */
+page{
+  background: #f9f9f9;
+  height: 100%;
+}
+.container{
+  background: #f9f9f9;
+  height: 100%;
+}

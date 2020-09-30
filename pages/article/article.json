@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "服务介绍",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

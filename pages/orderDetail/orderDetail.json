@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "addresser": "../../component/addresser/addresser"
+  },
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "询价详情",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

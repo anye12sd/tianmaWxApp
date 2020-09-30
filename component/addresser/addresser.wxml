@@ -1,0 +1,19 @@
+<!--component/addresser/addresser.wxml-->
+<view class="addresser-box">
+  <view class="flex flex-wrap">
+    <view class="box-left flex-1 {{addressList.isSender?'send':'receive'}}" bindtap="toCreateAddress" data-type="{{addressList.isSender?'sender':'receiver'}}">
+      <view class="name">
+        {{addressList.name}} {{addressList.phone}}
+      </view>
+      <view class="address">
+        {{addressList.address}}
+      </view>
+    </view>
+    <view class="box-right" wx:if="{{showAddressSelect}}" data-type="{{addressList.isSender?'sender':'receiver'}}" bindtap="addressSelect">
+      <view class="addressSelect">
+        <view class="verticalDevider"></view>
+        <text>地址簿</text>
+      </view>
+    </view>
+  </view>
+</view>

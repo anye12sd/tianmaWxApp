@@ -1,0 +1,26 @@
+<!--component/locationSelect/locationSelect.wxml-->
+<view>
+  <view class="header flex flex-wrap">
+    <view class="header-text">{{dataList.start}}</view>
+    <view>
+      <image src="{{dataList.icon}}"></image>
+    </view>
+    <view class="header-text">{{dataList.end}}</view>
+  </view>
+  <view class="content flex flex-wrap">
+    <view class="input-left-box">
+      <picker bindchange="bindStartPickerChange" value="{{startIndex}}" range="{{startArray}}" range-key="value">
+        <view class="picker">
+          {{startArray[startIndex].value}}
+        </view>
+      </picker>
+    </view>
+    <view class="input-right-box">
+      <picker bindchange="bindEndPickerChange" value="{{endIndex}}" range="{{endArray}}" range-key="value">
+        <view class="picker">
+          {{endArray[endIndex].value}}
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>

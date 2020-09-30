@@ -1,0 +1,63 @@
+/* component/addresser/addresser.wxss */
+.flex{
+  display: flex
+}
+.flex-1{
+  flex: 1
+}
+.flex-wrap{
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between
+}
+.addresser-box{
+  padding:0 50rpx;
+  background: #fff;
+}
+.box-left{
+  padding: 45rpx 0;
+  padding-left: 55rpx;
+  font-size: 28rpx;
+  position: relative;
+}
+.box-left::before{
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 34rpx;
+  display: block;
+  width: 34rpx;
+  height: 34rpx;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top: calc(50% - 17rpx);
+}
+.send::before{
+  content: "发";
+  background: #000;
+}
+.receive::before{
+  content: "收";
+  background: #376ee8;
+}
+.address{
+  color: #969696;
+  margin-top: 8rpx;
+}
+.box-right{
+  line-height: 172rpx;
+}
+.addressSelect{
+  font-size: 28rpx;
+  width:120rpx;
+  margin-right: 22rpx;
+  text-align: right;
+  position: relative;
+}
+.verticalDevider{
+  position: absolute;
+  height:60rpx;
+  border-left: 1px solid #e5e5e5;
+  left:0;
+  top:calc(50% - 30rpx)
+}

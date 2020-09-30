@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+  },
+  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "宏伟天马物流",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

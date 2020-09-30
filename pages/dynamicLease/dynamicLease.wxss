@@ -1,0 +1,107 @@
+/* pages/dynamicLease/dynamicLease.wxss */
+page{
+  height: 100%;
+  background: #f9f9f9;
+}
+.container{
+  height: 100%;
+  background: #f9f9f9;
+}
+.input-form{
+  width: 100%;
+  padding-top: 50rpx;
+}
+.has-bottom{
+  border-bottom: 1px solid #e5e5e5;
+}
+.input-box{
+  width:calc(100vw - 120rpx);
+  height: 160rpx;
+  padding: 0 60rpx;
+  line-height: 160rpx;
+  background: #ffffff;
+}
+.input-box-label{
+  font-size: 28rpx;
+  color: #969696;
+}
+.button-add, .button-sami{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+  border:1px solid #e5e5e5;
+  border-radius: 50%;
+}
+.input-right-input{
+  width: 24vw;
+  display: inline-block;
+  height: 70rpx;
+  line-height: 70rpx;
+  vertical-align: middle;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+.input-right-radio-box{
+  text-align: right;
+}
+.picker{
+  text-align: right;
+  margin-right: 28rpx;
+}
+.picker::after{
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 2px 2px 0 0;
+  border-color: #969696;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  margin-left: 10rpx;
+  margin-top: 72rpx;
+}
+.price-box{
+  position: fixed;
+  bottom: 0;
+  width: calc(100vw - 120rpx);
+  padding: 0 60rpx;
+  background: #fff;
+  height: 160rpx;
+}
+.show-price{
+  font-size: 28rpx;
+}
+.show-price-box{
+  position: absolute;
+  padding-top: 40rpx;
+}
+.show-price-content{
+  color: #376ee8;
+}
+.explain{
+  position: absolute;
+  padding-top: 85rpx;
+  font-size: 24rpx;
+  color: #969696
+}
+.order-btn{
+  position: absolute;
+  margin-top: 35rpx;
+  width: 130rpx;
+  right:40rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  color:#fff;
+  background: #376ee8;
+  border-radius: 8rpx;
+}
+.explain{
+  color: #969696;
+  padding:0 60rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}

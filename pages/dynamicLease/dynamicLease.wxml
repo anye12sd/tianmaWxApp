@@ -1,0 +1,60 @@
+<!--pages/dynamicLease/dynamicLease.wxml-->
+<view class="container">
+  <view class="input-form">
+    <!-- <view class="input-box flex">
+      <view class="input-box-label flex-1 has-bottom">预计日估存储面积</view>
+      <view class="input-right-box flex-1 has-bottom">
+        <image src="../../img/sami-select.png" class="button-sami" bindtap="squareChange" data-operate="sami"></image>
+        <input type="number" class="input-right-input" placeholder="0 平方" value="{{square}}" bindinput="setSquare"/>
+        <image src="../../img/add-select.png" class="button-add" bindtap="squareChange" data-operate="add"></image>
+      </view>
+    </view> -->
+    <formInput dataList="{{squareList}}" bind:getValue="getSquare"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{deliverAmountList}}" bind:getValue="getDeliverAmount"></formInput>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{hasService}}" bind:getRadioValue="getRadioValue"></formInput>
+    <!-- <view class="divider" wx:if="{{radioChecked}}"></view> -->
+    <!-- <formInput wx:if="{{radioChecked}}" dataList="{{operate}}" selectArray="{{operateArray}}" bind:getSelectValue="operate"></formInput> -->
+    <view class="divider"></view>
+    <formInput dataList="{{deliverWayList}}" selectArray="{{array}}" bind:getSelectValue="getSelectValue"></formInput>
+    <block wx:if="{{radioChecked}}">
+      <view class="explain" wx:if="{{index == 0}}">单品发货费{{priceList[index].value}}元/单，本费用另计</view>
+      <view class="explain" wx:else>组合发货费{{priceList[index].value}}元/单，本费用另计</view>
+    </block>
+    <!-- <view class="input-box flex">
+      <view class="input-box-label flex-1 has-bottom">是否包含操作服务</view>
+      <view class="input-right-box flex-1 input-right-radio-box has-bottom">
+        <radio value="r1" checked="{{radioChecked}}" color="#376ee8" class="input-right-radio" bindtap="toggleRadioCheck"/>
+      </view>
+    </view> -->
+    <!-- <view class="input-box flex">
+      <view class="input-box-label flex-1">发货方式</view>
+      <view class="input-right-box flex-1">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            {{array[index]}}
+          </view>
+        </picker>
+      </view>
+    </view> -->
+  </view>
+  <view class="price-box">
+    <priceEntry priceItem="{{priceItem}}" bind:getOrderPrice="getOrderPrice" bind:order="order" hasPhoneNum="{{hasPhoneNum}}"></priceEntry>
+    <!-- <view class="flex">
+      <view class="flex-1 show-price">
+        <view class="show-price-box">
+          <text class="show-price-text">预估费用：</text>
+          <text class="show-price-content">￥{{totalPrice}}</text>
+        </view>
+        <text class="explain">不包含单品发货费用/组合发货费，仅供参考</text>
+      </view>
+      <view>
+        <view wx:if="{{showOrderBtn}}" class="order-btn">下单</view>
+        <view wx:else class="order-btn">询价</view>
+      </view>
+    </view> -->
+  </view>
+  <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+</view>

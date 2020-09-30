@@ -1,0 +1,94 @@
+/* pages/addressBook/addressBook.wxss */
+page{
+  padding-bottom: 80rpx;
+  background: #f9f9f9;
+}
+.container{
+  padding-bottom: 80rpx;
+}
+.input-search-box{
+  padding: 30rpx 40rpx;
+  background: #fff;
+  font-size: 28rpx;
+  position: relative;
+}
+.input-search-box image{
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  left:56rpx;
+  top:40rpx
+}
+.input-search{
+  padding: 10rpx 0;
+  padding-left: 70rpx;
+  background: #f9f9f9;
+}
+.address-book-box{
+  padding: 45rpx 60rpx;
+  background: #fff;
+}
+.left-box{
+  font-size: 28rpx;
+  position: relative;
+}
+.name{
+  width:150rpx;
+  display: inline-block;
+}
+.phone{
+  padding-right: 70rpx;
+}
+.defaultLabel{
+  font-size: 20rpx;
+  padding: 0rpx 4rpx;
+  color: #376ee8;
+  border-radius: 8rpx;
+  border: 1px solid #376ee8;
+  position: absolute;
+  right:68rpx;
+  top:2rpx
+}
+.address{
+  font-size: 28rpx;
+  color: #969696;
+  margin-top: 8rpx;
+}
+.flex-btn{
+  line-height: 82rpx;
+}
+.btn-box{
+  font-size: 28rpx;
+  width:120rpx;
+  margin-right: 22rpx;
+  text-align: right;
+  position: relative;
+}
+.verticalDevider{
+  position: absolute;
+  height:60rpx;
+  border-left: 1px solid #e5e5e5;
+  left:0;
+  top:calc(50% - 30rpx)
+}
+.addNewAddress{
+  background: #fff;
+  padding:20rpx 30rpx;
+  position: fixed;
+  bottom: 0;
+  height:80rpx;
+  left:0;
+  right:0;
+  border-top: 1px solid #e5e5e5;
+}
+.addNewAddress text{
+  font-size: 32rpx;
+  color: #fff;
+  background: #376ee8;
+  display: block;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 8rpx;
+  width: 100%;
+}

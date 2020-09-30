@@ -1,0 +1,121 @@
+/**app.wxss**/
+.container {
+  background: #f9f9f9;
+  box-sizing: border-box;
+} 
+.location-box{
+  width: calc(100vw - 40rpx)
+}
+.flex{
+  display: flex
+}
+.flex-1{
+  flex: 1
+}
+.flex-wrap{
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between
+}
+.flex-basis{
+  flex-basis: calc(100vw - 40rpx)
+}
+.textl{
+  text-align: left;
+}
+.textr{
+  text-align: right;
+}
+.boxshadow2{ 
+  box-shadow:-1px 0px 10px #eee,   /*左边阴影*/              
+  0px -10px 10px transparent,  /*上边阴影*/               
+  1px 0px 10px #eee,  /*右边阴影*/  
+  0px 1px 10px #eee; /*下边阴影*/ 
+}
+.input-form{
+  width: 100%;
+  padding-top: 40rpx;
+}
+.has-bottom{
+  border-bottom: 1px solid #e5e5e5;
+}
+.input-box{
+  width:calc(100vw - 120rpx);
+  height: 160rpx;
+  padding: 0 60rpx;
+  line-height: 160rpx;
+  background: #ffffff;
+}
+.input-box-label{
+  font-size: 28rpx;
+  color: #969696;
+}
+.button-add, .button-sami{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+  border:1px solid #e5e5e5;
+  border-radius: 50%;
+}
+.input-right-input{
+  width: 24vw;
+  display: inline-block;
+  height: 70rpx;
+  line-height: 70rpx;
+  vertical-align: middle;
+  color: #000;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+}
+.input-right-radio-box{
+  text-align: right;
+}
+.picker{
+  text-align: right;
+  margin-right: 28rpx;
+}
+.picker::after{
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 2px 2px 0 0;
+  border-color: #969696;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  margin-left: 10rpx;
+  margin-top: 72rpx;
+}
+.price-box{
+  position: fixed;
+  bottom: 0;
+  width: calc(100vw - 120rpx);
+  padding: 0 60rpx;
+  background: #fff;
+  height: 160rpx;
+  z-index: 12;
+}
+.divider{
+  margin-left: 60rpx;
+  border-bottom: 1px solid #e5e5e5;
+}
+.loading-tip{
+  font-size: 32rpx;
+  color:#333;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 50rpx;
+}
+.shadow{
+  position: fixed;
+  background: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

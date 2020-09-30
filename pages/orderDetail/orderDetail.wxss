@@ -1,0 +1,25 @@
+/* pages/addressBook/addressBook.wxss */
+page{
+  background: #f9f9f9;
+  height: 100%;
+}
+.container{
+  background: #f9f9f9;
+  padding-bottom: 30rpx;
+}
+.order-detail-img{
+  width: 100%;
+  height: calc(100vw / 3.87931);
+}
+.order-detail-box{
+  background: #fff;
+  padding: 40rpx 60rpx;
+  font-size: 30rpx;
+  color: #969696;
+}
+.order-detail-content{
+  color: #333;
+}
+.check-price{
+  color: #376ee8;
+}

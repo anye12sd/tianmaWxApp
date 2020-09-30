@@ -1,0 +1,25 @@
+<!--pages/seaFreight/seaFreight.wxml-->
+<view class="container">
+  <view class="input-form">
+    <locationSelect dataList="{{locationSelect}}" endArray="{{endArray}}" startArray="{{startArray}}" bind:getStartSelectValue="getStartSelectValue" bind:getEndSelectValue="getEndSelectValue" ></locationSelect>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{boxList}}" bind:getValue="getBox"></formInput>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{hasService}}" bind:getRadioValue="getDeclearRadioValue"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{AmountList}}" bind:getValue="getAmount"></formInput>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{onLoadRadio}}" bind:getRadioValue="getOnLoadRadioValue"></formInput>
+  </view>
+  <view class="input-form" wx:if="{{onLoadRadioChecked}}">
+    <locationSelect dataList="{{loadLocationSelect}}" endArray="{{loadEndArray}}" startArray="{{loadStartArray}}" bind:getStartSelectValue="getLoadStartSelectValue" bind:getEndSelectValue="getLoadEndSelectValue" ></locationSelect>
+  </view>
+  <view class="price-box">
+    <priceEntry priceItem="{{priceItem}}" hasPhoneNum="{{hasPhoneNum}}" bind:getOrderPrice="getOrderPrice" bind:order="order"></priceEntry>
+  </view>
+  <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+</view>
+
