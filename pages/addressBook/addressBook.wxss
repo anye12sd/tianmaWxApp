@@ -67,7 +67,7 @@ page{
 .verticalDevider{
   position: absolute;
   height:60rpx;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid #f5f5f5;
   left:0;
   top:calc(50% - 30rpx)
 }
@@ -76,10 +76,10 @@ page{
   padding:20rpx 30rpx;
   position: fixed;
   bottom: 0;
-  height:80rpx;
+  height:100rpx;
   left:0;
   right:0;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #f5f5f5;
 }
 .addNewAddress text{
   font-size: 32rpx;
@@ -87,8 +87,8 @@ page{
   background: #376ee8;
   display: block;
   text-align: center;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   border-radius: 8rpx;
   width: 100%;
 }

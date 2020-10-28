@@ -13,7 +13,7 @@ Component({
    */
   data: {
     deliverAmount: "",
-    radioChecked: true,
+    radioChecked: false,
     selectIndex: 0
   },
 
@@ -39,6 +39,7 @@ Component({
       this.setData({
         deliverAmount: parseInt(e.detail.value)
       })
+      this.triggerEvent('getValue', {sonParam: e.detail.value})
     },
     amountChange: function(e){
       var that = this

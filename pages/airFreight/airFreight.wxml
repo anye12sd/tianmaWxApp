@@ -10,8 +10,10 @@
   </view>
   <view class="input-form">
     <formInput dataList="{{hasService}}" bind:getRadioValue="getDeclearRadioValue"></formInput>
-    <view class="divider"></view>
-    <formInput dataList="{{AmountList}}" bind:getValue="getAmount"></formInput>
+    <block wx:if="{{declearRadioChecked}}">
+      <view class="divider"></view>
+      <formInput dataList="{{AmountList}}" bind:getValue="getAmount"></formInput>
+    </block>
   </view>
   <!-- <view class="input-form">
     <formInput dataList="{{onLoadRadio}}" bind:getSelectValue="getOnLoadRadioValue"></formInput>

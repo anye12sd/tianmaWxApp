@@ -19,6 +19,7 @@ Component({
     boatArray:[],
     startArray:[],
     endArray:[],
+    boxTypeArray:[],
     boatIndex: 0,
     loadEndArray: [],
     loadEndIndex: 0,
@@ -26,12 +27,13 @@ Component({
     loadStartIndex: 0,
     startSelected: 0,
     endSelected: 0,
+    boxTypeIndex: 0,
     onLoadPrice: 0,
     showShadow: false,
     hasPhoneNum: "",
     phone: "",
-    declearRadioChecked: true,
-    onLoadRadioChecked: true,
+    declearRadioChecked: false,
+    onLoadRadioChecked: false,
     amount: 0,
     locationSelect: {
       start: "起运港",
@@ -47,6 +49,10 @@ Component({
       label: "装箱数",
       placeholder: "0 箱",
       isInput: true
+    },
+    boxTypeList:{
+      label: "集装箱类型",
+      isSelect: true
     },
     hasService: {
       label: "是否报关",
@@ -67,6 +73,7 @@ Component({
     },
     priceItem: {
       totalPrice: "--",
+      rmbPrice: "",
       showOrderBtn: false,
       text: "不包含提箱费等相关杂费，仅供参考"
     }
@@ -108,6 +115,7 @@ Component({
             startArray: res.data.list[0].values,
             endArray: res.data.list[1].values,
             loadEndArray: [res.data.list[0].values[0]],
+            boxTypeArray: res.data.list[4].values,
           })
           wx.hideLoading()
         }else{
@@ -142,6 +150,12 @@ Component({
     getBox: function(e){
       this.setData({
         box: e.detail.sonParam
+      })
+    },
+    // 集装箱类型
+    getBoxValue: function(e){
+      this.setData({
+        boxTypeIndex: e.detail.sonParam
       })
     },
     // 是否需要陆运
@@ -223,8 +237,10 @@ Component({
         setting4: that.data.declearRadioChecked ? 2 : 1,
         setting5: that.data.amount,
         setting6: that.data.boatArray[that.data.boatIndex].value,
-        setting7: that.data.onLoadRadioChecked ? price : 0
+        setting7: that.data.onLoadRadioChecked ? price : 0,
+        setting8: that.data.boxTypeArray[that.data.boxTypeIndex].id,
       }
+      console.log(params)
       wx.showLoading({
         title: '请等待',
       })
@@ -233,7 +249,8 @@ Component({
         console.log(res)
         if(res.code == 0){
           that.setData({
-            "priceItem.totalPrice": res.data.price,
+            "priceItem.totalPrice": res.data.total_price,
+            "priceItem.rmbPrice": res.data.rmb_price,
             "priceItem.showOrderBtn": true,
             showShadow: true
           })
@@ -264,7 +281,8 @@ Component({
           setting4: that.data.declearRadioChecked ? 2 : 1,
           setting5: that.data.amount,
           setting6: that.data.boatArray[that.data.boatIndex].id,
-          setting7: that.data.priceItem.totalPrice,
+          setting7: that.data.priceItem.rmbPrice || 0,
+          setting8: that.data.boxTypeArray[that.data.boxTypeIndex].id,
           district_from: that.data.loadStartArray[that.data.loadStartIndex].value,
           nick_name: wx.getStorageSync('uesrInfo').nickName,
           mobile: that.data.phone,
@@ -292,7 +310,17 @@ Component({
         if(res.code == 0){
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,
@@ -317,6 +345,7 @@ Component({
               showShadow: false,
               "priceItem.showOrderBtn": false,
               "priceItem.totalPrice": '--',
+              "priceItem.rmbPrice": '',
             })
           }
         }

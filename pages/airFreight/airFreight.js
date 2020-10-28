@@ -20,7 +20,7 @@ Component({
     endArray: ["请选择", "终点1", "终点2", "终点3", "终点4", "终点5"],
     startSelected: 0,
     endSelected: 0,
-    declearRadioChecked: true,
+    declearRadioChecked: false,
     onLoadRadioChecked: true,
     showShadow: false,
     hasPhoneNum: "",
@@ -211,7 +211,17 @@ Component({
         if (res.code == 0) {
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,

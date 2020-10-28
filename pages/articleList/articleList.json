@@ -1,6 +1,8 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "parser":"../../component/parser/parser"
+  },
   "navigationBarBackgroundColor": "#376ee8",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "服务介绍",

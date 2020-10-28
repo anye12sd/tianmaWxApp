@@ -53,6 +53,23 @@ Component({
         }
         wx.hideLoading()
       })
+    },
+    tel: function(){
+      wx.makePhoneCall({
+        phoneNumber: '13813813813',
+        // success: function(){
+        //   wx.showToast({
+        //     title: '拨打成功',
+        //     icon: 'success'
+        //   })
+        // },
+        // fail: function(){
+        //   wx.showToast({
+        //     title: '拨打失败',
+        //     icon: 'none'
+        //   })
+        // },
+      })
     }
   }
 })

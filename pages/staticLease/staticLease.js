@@ -123,6 +123,7 @@ Component({
       })
     },
     getMonth: function (e) {
+      console.log(e.detail.sonParam)
       this.setData({
         month: e.detail.sonParam
       })
@@ -181,8 +182,8 @@ Component({
         order_amount: that.data.priceItem.totalPrice,
         setting1: that.data.month,
         setting2: that.data.square,
-        setting3: that.data.radioChecked ? "1" : "0",
-        setting4: that.data.array[that.data.index].id,
+        // setting3: that.data.radioChecked ? "1" : "0",
+        // setting4: that.data.array[that.data.index].id,
         // setting5: that.data.index,
         nick_name: wx.getStorageSync('uesrInfo').nickName,
         mobile: that.data.phone,
@@ -196,7 +197,17 @@ Component({
         if (res.code == 0) {
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,

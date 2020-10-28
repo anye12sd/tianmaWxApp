@@ -3,11 +3,13 @@
   <view class="flex-1 show-price">
     <view class="show-price-box">
       <text class="show-price-text">预估费用：</text>
-      <text class="show-price-content">￥{{priceItem.totalPrice}}</text>
+      <text wx:if="{{priceItem.rmbPrice}}" class="show-price-content">${{priceItem.totalPrice}}<text wx:if="{{priceItem.rmbPrice != '0.00'}}">+￥{{priceItem.rmbPrice}}</text></text>
+      <text wx:else class="show-price-content">￥{{priceItem.totalPrice}}</text>
     </view>
     <text class="explain">{{priceItem.text}}</text>
   </view>
   <view>
+    <!-- 没有手机号先显示获取手机号按钮 -->
     <button wx:if="{{hasPhoneNum}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="order-btn">询价</button>
     <block wx:else>
       <view wx:if="{{priceItem.showOrderBtn}}" class="order-btn" bindtap="order">下单</view>

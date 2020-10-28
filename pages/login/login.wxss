@@ -5,15 +5,31 @@
 }
 .logo{
   width: 400rpx;
-  height: 82rpx;
+  height: 192rpx;
   text-align: center;
-  margin-top: calc(30vh - 41rpx)
+  margin-top: calc(20vh - 41rpx)
+}
+.logo-text-box{
+  margin-top: calc(10vh - 41rpx);
+  text-align: center;
+}
+.logo-text{
+  font-size: 50rpx;
+  font-weight: bolder;
+  letter-spacing: 6rpx
+}
+.logo-subtext{
+  font-size: 28rpx;
+  color: #bbb;
+  margin-top: 20rpx;
+  letter-spacing: 12rpx
 }
 .login-btn{
-  width: 100% !important;
-  font-size: 30rpx;
-  margin-top: calc(20vh);
-  border-radius: 100px !important;
+  width: 500rpx !important;
+  font-size: 32rpx;
+  padding: 25rpx 0;
+  margin-top: calc(15vh);
+  border-radius: 10rpx !important;
   background: #376ee8 !important;
   color: #fff;
 }

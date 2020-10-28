@@ -12,6 +12,11 @@ Component({
    * 组件的初始数据
    */
   data: {
+    background: [],
+    autoplay: false,
+    interval: 2000,
+    duration: 500,
+    currentSwiper: 0,
     articleList: [],
     articleChildrenList: [],
     activeView: 0,
@@ -25,7 +30,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onShow: function(){
+    onLoad: function(){
       var that = this;
       that.data.articleList.length ? console.log(1) : that.getArticleList()
     },
@@ -42,7 +47,7 @@ Component({
         console.log(res)
         if(res.code == 0){
           that.setData({
-            articleList: res.data.list
+            articleList: res.data.list,
           })
           that.getArticleDetail(res.data.list[0].id)
         }else{
@@ -53,6 +58,11 @@ Component({
         }
       })
     },
+    swiperChange: function (e) {
+      this.setData({
+        currentSwiper: e.detail.current
+      })
+    },
     getArticleDetail: function(id){
       var that = this
       getArticleList(id).then(res => {
@@ -61,7 +71,8 @@ Component({
           that.setData({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
             "currentItem.title": res.data[0].title,
-            "currentItem.content": res.data[0].content,
+            "currentItem.content": res.data[0].content.replace(/<img/gi, '<img style="max-width:100%;height:auto;float:left;display:block;" ').replace(/<p/gi, '<p style="text-indent: 34px;text-align: justify;" '),
+            background: res.data[0].cover,
           })
           wx.hideLoading()
         }else{
@@ -85,6 +96,7 @@ Component({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
             "currentItem.title": res.data[0].title,
             "currentItem.content": res.data[0].content,
+            background: res.data[0].cover,
           })
         }else{
           wx.showToast({

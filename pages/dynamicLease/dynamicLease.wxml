@@ -18,7 +18,7 @@
     <!-- <view class="divider" wx:if="{{radioChecked}}"></view> -->
     <!-- <formInput wx:if="{{radioChecked}}" dataList="{{operate}}" selectArray="{{operateArray}}" bind:getSelectValue="operate"></formInput> -->
     <view class="divider"></view>
-    <formInput dataList="{{deliverWayList}}" selectArray="{{array}}" bind:getSelectValue="getSelectValue"></formInput>
+    <formInput wx:if="{{radioChecked}}" dataList="{{deliverWayList}}" selectArray="{{array}}" bind:getSelectValue="getSelectValue"></formInput>
     <block wx:if="{{radioChecked}}">
       <view class="explain" wx:if="{{index == 0}}">单品发货费{{priceList[index].value}}元/单，本费用另计</view>
       <view class="explain" wx:else>组合发货费{{priceList[index].value}}元/单，本费用另计</view>

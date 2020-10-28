@@ -4,7 +4,7 @@
 }
 .home-header{
   width: 100%;
-  height: 300rpx;
+  height: calc(100vw / 3.125);
   position: relative;
 }
 .home-image{
@@ -13,25 +13,29 @@
 }
 .home-info-box{
   position: absolute;
-  top: 88rpx;
+  top: 70rpx;
   left: 70rpx
 }
 .home-info-avater{
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   background: #fff;
   border-radius: 50%;
   text-align: center;
-  line-height: 160rpx;
+  line-height: 140rpx;
 }
 .home-info-avater image{
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
+}
+.home-info-avater .home-info-unlogin{
+  width: 60rpx;
+  height: 60rpx;
 }
 .home-info-username{
   position: absolute;
-  top:36rpx;
+  top:30rpx;
   left: 140rpx;
   width: 100%;
 }
@@ -63,14 +67,14 @@
   width: 150rpx;
 }
 .home-content-list-image image{
-  width: 70rpx;
-  height: 70rpx;
-  margin-left: 55rpx;
-  margin-top: 40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 50rpx;
+  margin-top: 32rpx;
 }
 .home-content-list .home-content-list-content{
   font-size: 28rpx;
-  border-bottom:1px solid #e5e5e5;
+  border-bottom:1px solid #f5f5f5;
   position: relative;
 }
 .home-content-list .home-content-list-content::after{

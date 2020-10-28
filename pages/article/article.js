@@ -53,8 +53,9 @@ Component({
           that.setData({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
             "currentItem.title": res.data[0].title,
-            "currentItem.content": res.data[0].content,
+            "currentItem.content": res.data[0].content.replace(/<img/gi, '<img style="max-width:100%;height:auto;float:left;display:block" '),
           })
+          console.log(that.data.currentItem.content)
         }else{
           wx.showToast({
             title: res.msg,

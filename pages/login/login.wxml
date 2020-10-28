@@ -1,5 +1,9 @@
 <!--pages/login/login.wxml-->
 <view class="login">
-  <image src="../../img/logo.png" class="logo"></image>
+  <image src="../../img/logo1.png" class="logo"></image>
+  <view class="logo-text-box">
+    <view class="logo-text">宏伟天马物流</view>
+    <view class="logo-subtext">国际物流服务平台</view>
+  </view>
   <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="login-btn">微信登录</button>
 </view>

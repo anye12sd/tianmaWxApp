@@ -6,10 +6,16 @@
     <addresser addressList="{{receiverAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
   </view>
   <view class="input-form">
-    <formInput dataList="{{carSelect}}" selectArray="{{carArray}}" bind:getSelectValue="getCarSelectValue"></formInput>
+    <formInput dataList="{{carFilter}}" selectArray="{{filterArray}}" bind:getSelectValue="getCarFilterValue"></formInput>
+    <view class="divider"></view>
+    <formInput wx:if="{{filter == 1}}" dataList="{{volumeList}}" bind:getValue="getVolume"></formInput>
+    <formInput wx:else dataList="{{weightList}}" bind:getValue="getWeight"></formInput>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{carSelect}}" selectArray="{{newCarArray}}" bind:getSelectValue="getCarSelectValue"></formInput>
     <map id="navi_map" longitude="{{markers[0].longitude}}" latitude="{{markers[0].latitude}}" scale="12" markers="{{markers}}" polyline="{{polyline}}" wx:if="{{mapShow}}"></map>
-    <view class="car-desc">{{carArray[car].desc}}</view>
-    <view class="car-img-box">
+    <view class="car-desc" wx-if="{{carArray[car].desc}}">{{carArray[car].desc}}</view>
+    <view class="car-img-box" wx-if="{{carArray[car].pic}}">
       <image class="car-img" src="{{carArray[car].pic}}"></image>
     </view>
   </view>

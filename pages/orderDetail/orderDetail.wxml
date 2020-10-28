@@ -3,10 +3,10 @@
 <view class="container">
   <block wx:if="{{orderDetailList.order_type == 4}}">
     <view class="input-form">
-    <addresser addressList="{{senderAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
-    <view class="divider"></view>
-    <addresser addressList="{{receiverAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
-  </view>
+      <addresser addressList="{{senderAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
+      <view class="divider"></view>
+      <addresser addressList="{{receiverAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
+    </view>
   </block>
   <view class="input-form">
     <view class="flex flex-wrap order-detail-box">
@@ -27,17 +27,25 @@
   </view> -->
   <view class="input-form">
     <block wx:for="{{orderDetailList.detail.sets.columns.length}}" wx:key="index">
-      <view class="flex flex-wrap order-detail-box">
-      <text>{{orderDetailList.detail.sets.columns[index]}}</text>
-      <text class="order-detail-content">{{orderDetailList.detail.sets.datas[index]}}{{orderDetailList.detail.sets.unit[index]}}</text>
-    </view>
-    <view class="divider" wx:if="{{orderDetailList.detail.sets.columns.length !== index + 1}}"></view>
+      <block wx:if="{{orderDetailList.detail.sets.datas[index] && orderDetailList.detail.sets.datas[index] != 0}}">
+        <view class="flex flex-wrap order-detail-box">
+          <text>{{orderDetailList.detail.sets.columns[index]}}</text>
+          <text
+            class="order-detail-content">{{orderDetailList.detail.sets.datas[index]}}{{orderDetailList.detail.sets.unit[index]}}</text>
+        </view>
+        <view class="divider" wx:if="{{orderDetailList.detail.sets.columns.length !== index + 1}}"></view>
+      </block>
     </block>
   </view>
   <view class="input-form">
     <view class="flex flex-wrap order-detail-box">
       <text>预估费用</text>
-      <text class="check-price">￥ {{orderDetailList.order_amount}}</text>
+      <block wx:if="{{orderDetailList.order_type == 5 || orderDetailList.order_type == 7}}">
+        <text class="check-price">$ {{orderDetailList.order_amount}}</text>
+      </block>
+      <block wx:else>
+        <text class="check-price">￥ {{orderDetailList.order_amount}}</text>
+      </block>
     </view>
     <block wx:if="{{orderDetailList.order_status == 2}}">
       <view class="divider"></view>
@@ -72,5 +80,17 @@
         <text class="order-detail-content">{{orderDetailList.cancel_time}}</text>
       </view>
     </block>
+  </view>
+  <view class="flex service-box">
+    <button bindtap="tel" class="flex-1 phone-num">
+      <image src="../../img/telephone.png"></image>
+      客服电话
+    </button>
+    <view class="flex-1 service-online">
+      <button open-type="contact" class="service-button">
+        <image src="../../img/icon_17.png"></image>
+        在线客服
+      </button>
+    </view>
   </view>
 </view>

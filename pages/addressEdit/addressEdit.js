@@ -20,6 +20,7 @@ Component({
    */
   data: {
     showAddress: false,
+    areaText: "区域",
     switchChecked: false,
     showInput: true,
     addressId: "",
@@ -43,7 +44,18 @@ Component({
       var that = this
       var item, addressNew = wx.getStorageSync('addressNew')
       if(addressNew){
+        // 新增地址或者从网络货运过来的
         addressNew = JSON.parse(addressNew)
+        console.log(addressNew)
+        if(addressNew.type == "receiver"){
+          that.setData({
+            areaText: '收货区域',
+          })
+        }else {
+          that.setData({
+            areaText: '发货区域',
+          })
+        }
         that.setData({
           addressNewList: addressNew,
           addressNew: addressNew.addressNew,
@@ -51,6 +63,7 @@ Component({
         })
       } 
       if (options.item) {
+        // 编辑地址
         item = JSON.parse(options.item)
         that.setData({
           addressId: item.id || "",

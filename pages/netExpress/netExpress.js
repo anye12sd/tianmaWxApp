@@ -18,15 +18,24 @@ Component({
    */
   data: {
     car: 0,
+    filter: 0,
     hasPhoneNum: "",
     phone: "",
     mapShow: false,
     distance: "",
     showAddressSelect: true,
     showShadow: false,
-    carArray: ["请选择", "车型1", "车型2", "车型3", "车型4", "车型5"],
+    carArray: [],
+    weightMax: 0,
+    volumeMax: 0,
+    newCarArray: [],
+    filterArray: [{value: "按载重"}, {value: "按体积"}],
     carSelect: {
       "label": "车型",
+      "isSelect": true
+    },
+    carFilter: {
+      "label": "车型筛选",
       "isSelect": true
     },
     senderAddressList: {
@@ -38,6 +47,16 @@ Component({
       "isSender": false,
       "name": "这是收货人",
       "address": "这是收货地址",
+    },
+    weightList: {
+      label: "装车重量",
+      placeholder: "0 吨",
+      isInput: true
+    },
+    volumeList: {
+      label: "装车体积",
+      placeholder: "0 立方",
+      isInput: true
     },
     priceItem: {
       totalPrice: "--",
@@ -91,10 +110,22 @@ Component({
       getEmunList('network_freight').then(res => {
         // console.log(res)
         if (res.code == 0) {
+          var car = res.data.list[0].values
+          car.unshift({value: '请选择'})
           that.setData({
             'carSelect.label': res.data.list[0].name,
-            carArray: res.data.list[0].values
+            carArray: car,
+            newCarArray: car,
+            // 获取车载重量最大值
+            weightMax: Math.max.apply(Math, car.map(function(item) {
+              return item.weight << 0 
+            })),
+            // 获取车载体积最大值
+            volumeMax: Math.max.apply(Math, car.map(function(item) {
+              return item.volume << 0 
+            }))
           })
+          console.log(car)
           wx.hideLoading()
         } else {
           wx.showToast({
@@ -131,20 +162,44 @@ Component({
         // wx.removeStorageSync("AddressSelect")
       }
     },
-    // 快递品牌选择
     getCarSelectValue: function (e) {
       this.setData({
         car: e.detail.sonParam
       })
     },
-    getVolume: function (e) {
+    getCarFilterValue: function (e) {
+      let that = this
       this.setData({
-        volume: e.detail.sonParam
+        filter: e.detail.sonParam,
+        car: 0,
+        weight: 0,
+        volume: 0,
+        newCarArray: that.data.carArray
+      })
+      console.log(this.data.filter)
+    },
+    getVolume: function (e) {
+      // 筛选体积大于装车体积的车辆，如果没有，返回最大体积车辆
+      let newArray = this.data.carArray.filter(item => item.volume >= e.detail.sonParam )
+      if(e.detail.sonParam > this.data.volumeMax){
+        newArray = this.data.carArray.filter(item => item.volume == this.data.volumeMax )
+      }
+      this.setData({
+        volume: e.detail.sonParam,
+        newCarArray: newArray, 
+        car: 0
       })
     },
-    getWeight: function (e) {
+    getWeight: function (e) {    
+      // 筛选载重大于装车重量的车辆，如果没有，返回最大载重车辆
+      let newArray = this.data.carArray.filter(item => item.weight >= e.detail.sonParam )
+      if(e.detail.sonParam > this.data.weightMax){
+        newArray = this.data.carArray.filter(item => item.weight == this.data.weightMax )
+      }
       this.setData({
-        weight: e.detail.sonParam
+        weight: e.detail.sonParam,
+        newCarArray: newArray, 
+        car: 0
       })
     },
     showReOrder: function () {
@@ -170,7 +225,15 @@ Component({
       that.getLocation(that.data.receiverAddressList.address, "receiver")
     },
     getLocation: function (address, type) {
+      console.log(address)
       var that = this
+      if(!that.data.carArray[that.data.car].id){
+        wx.showToast({
+          title: '请选择车型',
+          icon: 'none'
+        })
+        return false
+      }
       wx.request({
         url: 'https://restapi.amap.com/v3/geocode/geo?address=' + address + '&output=JSON&key=25d11906d5f5421fc88e01cc52576119',
         header: {
@@ -216,6 +279,7 @@ Component({
         origin: that.data.markers[0].longitude + ',' + that.data.markers[0].latitude,
         destination: that.data.markers[1].longitude + ',' + that.data.markers[1].latitude,
         success: function (data) {
+          console.log(data)
           var points = [];
           if (data.paths && data.paths[0] && data.paths[0].steps) {
             var steps = data.paths[0].steps;
@@ -236,8 +300,8 @@ Component({
               width: 6
             }]
           });
-          if (data.paths[0] && data.paths[0].distance) {
-            // console.log(data.paths[0].distance)
+          if (data.paths.length && data.paths[0].distance) {
+            console.log(data)
             that.setData({
               distance: data.paths[0].distance + '米'
             });
@@ -264,6 +328,13 @@ Component({
     },
     getOrder: function () {
       var that = this
+      if(!that.data.carArray[that.data.car].id){
+        wx.showToast({
+          title: '请选择车型',
+          icon: 'none'
+        })
+        return false
+      }
       var params = {
         setting1: parseFloat(that.data.distance) * 0.001,
         setting2: that.data.carArray[that.data.car].id,
@@ -309,7 +380,17 @@ Component({
         if (res.code == 0) {
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,

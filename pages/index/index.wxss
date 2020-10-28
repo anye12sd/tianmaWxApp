@@ -59,7 +59,7 @@
 .swiper-box{
   margin-top: 40rpx;
   width: 100%;
-  height: 550rpx;
+  height: 462rpx;
   border-radius: 8rpx;
 }
 .swiper swiper swiper-item{
@@ -80,7 +80,7 @@
 }
 .swiper-img{
   width: 100%;
-  height:550rpx;
+  height: 462rpx;
   border-radius: 8px;
 }
 /*用来包裹所有的小圆点  */
@@ -163,9 +163,9 @@
   margin-top: 8rpx;
 }
 .deliver-way-text image{
-  width:40rpx;
-  height: 40rpx;
-  vertical-align: bottom;
+  width:70rpx;
+  height: 70rpx;
+  vertical-align: middle;
   margin-right: 8rpx
 }
 .deliver-way-last{
@@ -176,5 +176,5 @@
   width: 70rpx;
   height: 70rpx;
   right: 60rpx;
-  top: 50rpx
+  top: 45rpx
 }

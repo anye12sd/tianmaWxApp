@@ -84,6 +84,15 @@ Component({
           orderList: that.data.orderList.concat(res.data.list),
           totalPage: res.data.total_page
         })
+        if(res.data.total == 0){
+          wx.showToast({
+            title: '暂无订单',
+            icon: 'none',
+            duration: 2000, //提示的延迟时间，单位毫秒，默认：1500 
+            mask: false, //是否显示透明蒙层，防止触摸穿透，默认：false 
+          })
+          return false
+        }
         that.pageScrollToBottom()
         wx.hideLoading()
       })

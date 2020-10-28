@@ -4,7 +4,7 @@
     <image src="../../img/home-background.png" class="home-image"></image>
     <view class="home-info-box">
       <view class="home-info-avater">
-        <image src="../../img/icon_12.png" wx:if="{{!hasUserInfo}}"></image>
+        <image class="home-info-unlogin" src="../../img/icon_12.png" wx:if="{{!hasUserInfo}}"></image>
         <block wx:else>
           <image src="{{userInfo.avatarUrl}}"></image>
         </block>
@@ -18,7 +18,7 @@
     </view>
   </view>
   <view class="home-content-box">
-    <view class="home-content boxshadow2">
+    <view class="home-content">
       <view class="home-content-list flex" bindtap="toPage" data-page="orderList" data-orderType="1">
         <view class="home-content-list-image">
           <image src="../../img/icon_13.png"></image>
@@ -38,7 +38,7 @@
         <view class="home-content-list-content flex-1">已撤销询价</view>
       </view>
     </view>
-    <view class="home-content boxshadow2">
+    <view class="home-content">
       <view class="home-content-list flex" bindtap="toPage" data-page="addressBook">
         <view class="home-content-list-image">
           <image src="../../img/icon_16.png"></image>
@@ -46,7 +46,7 @@
         <view class="home-content-list-content flex-1">地址簿</view>
       </view>
     </view>
-    <view class="home-content boxshadow2">
+    <view class="home-content">
       <view class="home-content-list flex">
         <view class="home-content-list-image">
           <image src="../../img/icon_17.png"></image>

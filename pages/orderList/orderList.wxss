@@ -12,7 +12,11 @@ page{
   padding: 20rpx 40rpx;
   background: #fff;
   font-size: 28rpx;
-  position: relative;
+  position: fixed;
+  top:0; 
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
 .input-search-box image{
   width: 44rpx;
@@ -20,6 +24,9 @@ page{
   position: absolute;
   left:56rpx;
   top:30rpx
+}
+.input-form-box{
+  margin-top: 100rpx;
 }
 .input-search{
   padding: 10rpx 0;
@@ -38,12 +45,12 @@ page{
 .orderNo{
   font-size: 28rpx;
   color: #969696;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #f5f5f5;
   padding-bottom: 12rpx;
 }
 .order-detail{
   padding: 30rpx 0 ;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #f5f5f5;
   font-size: 28rpx;
 }
 .order-detail-image{
@@ -53,9 +60,9 @@ page{
   text-align: center;
 }
 .order-detail-image image{
-  width: 50rpx;
-  height: 50rpx;
-  padding-top: 15rpx;
+  width: 60rpx;
+  height: 60rpx;
+  padding-top: 10rpx;
 }
 .order-detail-text{
   margin-left: 20rpx;
@@ -67,7 +74,7 @@ page{
 }
 .check-price-box{
   padding: 20rpx 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #f5f5f5;
 }
 .check-price-text, .checked-price-text{
   font-size: 28rpx;

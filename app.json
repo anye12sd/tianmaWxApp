@@ -1,17 +1,15 @@
 {
   "pages":[
+    "pages/ad/ad",
     "pages/index/index",
     "pages/domesticExpress/domesticExpress",
-    
     "pages/articleList/articleList",
     "pages/article/article",
-    
     "pages/feedback/feedback",
     "pages/home/home",
     "pages/orderList/orderList",
     "pages/orderDetail/orderDetail",
     "pages/login/login",
-    
     "pages/netExpress/netExpress",
     "pages/dynamicLease/dynamicLease",
     "pages/staticLease/staticLease",
@@ -41,6 +39,7 @@
   "tabBar": {
     "selectedColor": "#376ee8",
     "color": "#ccc",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",

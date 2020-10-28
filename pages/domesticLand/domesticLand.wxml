@@ -5,6 +5,8 @@
   </view>
   <view class="input-form">
     <formInput dataList="{{boxList}}" bind:getValue="getBox"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{boxTypeList}}" selectArray="{{boxTypeArray}}" bind:getSelectValue="getBoxValue"></formInput>
   </view>
   <view class="price-box">
     <priceEntry priceItem="{{priceItem}}" hasPhoneNum="{{hasPhoneNum}}" bind:order="order" bind:getOrderPrice="getOrderPrice"></priceEntry>

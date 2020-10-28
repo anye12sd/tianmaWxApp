@@ -25,6 +25,9 @@ Page({
     interval: 2000,
     duration: 500,
     currentSwiper: 0,
+    head_menu: [],
+    cont_menu: [],
+    foot_menu: []
   },
   //事件处理函数
   bindViewTap: function () {
@@ -78,26 +81,49 @@ Page({
     that.getLayout()
     // 获取首页轮播图
     that.getBanner()
-    wx.hideLoading()
   },
   getLayout: function () {
+    var that = this
     getLayoutList().then(res => {
       console.log(res)
+      if (res.code == 0) {
+        that.setData({
+          head_menu: res.data.head_menu,
+          cont_menu: res.data.cont_menu,
+          foot_menu: res.data.foot_menu,
+        })
+      }
     })
   },
   getBanner: function () {
     var that = this
     getBannerList().then(res => {
       // console.log(res)
-      that.setData({
-        background: res.data.list
-      })
+      if (res.code == 0) {
+        that.setData({
+          background: res.data.list
+        })
+        wx.hideLoading()
+      }
     })
   },
   swiperChange: function (e) {
     this.setData({
       currentSwiper: e.detail.current
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '天马物流',
+      path: 'pages/index/index',
+      imageUrl: '../../img/logo1.png',
+      success: (res) => {
+        // 分享成功
+      },
+      fail: (res) => {
+        // 分享失败
+      }
+    }
   },
   getUserInfo: function (e) {
     if (!e.detail.userInfo) {
@@ -239,7 +265,7 @@ Page({
   },
   toPage: function (e) {
     const token = wx.getStorageSync('token') ? wx.getStorageSync('token') : ""
-    if(!token){
+    if (!token) {
       wx.navigateTo({
         url: '../login/login'
       })

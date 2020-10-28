@@ -148,7 +148,17 @@ Component({
         if(res.code == 0){
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,

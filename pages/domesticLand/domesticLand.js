@@ -16,10 +16,12 @@ Component({
    * 组件的初始数据
    */
   data: {
-    startArray:["请选择","起始点1","起始点2","起始点3","起始点4","起始点5"],
-    endArray:["请选择","终点1","终点2","终点3","终点4","终点5"],
+    startArray:[],
+    endArray:[],
+    boxTypeArray:[],
     startSelected: 0,
     endSelected: 0,
+    boxTypeIndex: 0,
     showShadow: false,
     hasPhoneNum: "",
     phone: "",
@@ -33,6 +35,10 @@ Component({
       label: "装箱数",
       placeholder: "0 箱",
       isInput: true
+    },
+    boxTypeList:{
+      label: "集装箱类型",
+      isSelect: true
     },
     priceItem: {
       totalPrice: "--",
@@ -72,7 +78,8 @@ Component({
         if(res.code == 0){
           that.setData({
             startArray: res.data.list[0].values,
-            endArray: res.data.list[1].values
+            endArray: res.data.list[1].values,
+            boxTypeArray: res.data.list[2].values,
           })
           wx.hideLoading()
         }else{
@@ -87,6 +94,12 @@ Component({
     getBox: function(e){
       this.setData({
         box: e.detail.sonParam
+      })
+    },
+    // 集装箱类型
+    getBoxValue: function(e){
+      this.setData({
+        boxTypeIndex: e.detail.sonParam
       })
     },
     // 起始点
@@ -113,7 +126,8 @@ Component({
       var params = {
         setting1: that.data.startArray[that.data.startSelected].value,
         setting2: that.data.endArray[that.data.endSelected].value,
-        setting3: that.data.box
+        setting3: that.data.box,
+        setting4: that.data.boxTypeArray[that.data.boxTypeIndex].id,
       }
       console.log(params)
       postOrderInquiry('land_route', params).then(res => {
@@ -147,6 +161,7 @@ Component({
         setting1: that.data.startArray[that.data.startSelected].id,
         setting2: that.data.endArray[that.data.endSelected].id,
         setting3: that.data.box,
+        setting4: that.data.boxTypeArray[that.data.boxTypeIndex].id,
         nick_name: wx.getStorageSync('uesrInfo').nickName,
         mobile: that.data.phone,
       }
@@ -159,7 +174,17 @@ Component({
         if(res.code == 0){
           wx.showToast({
             title: '下单成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                wx.navigateTo({
+                  url: '../orderList/orderList?status=1',
+                })
+              }, 1000) //延迟时间
+            }
           })
           that.setData({
             showShadow: false,

@@ -11,7 +11,7 @@
     <input class="input-address-content flex-1" type="number" placeholder="请输入手机号码" value="{{phone}}" bindinput="updateValue" data-name="phone"/>
   </view>
   <view class="input-address-box flex">
-    <view class="input-address-label">收货区域</view>
+    <view class="input-address-label">{{areaText}}</view>
     <view class="infoText flex-1 infoText-placeholder" wx:if="{{showAddress == false}}" bindtap="translate">请选择</view>
     <view class="infoText flex-1" bindtap="translate" wx:else>{{province}} {{city}} {{county}}</view>
   </view>
