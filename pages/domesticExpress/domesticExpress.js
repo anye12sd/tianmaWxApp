@@ -22,6 +22,7 @@ Component({
   data: {
     expressIndex: 0,
     weight: "",
+    number: "",
     hasPhoneNum: "",
     JDFlag: false,
     province: "浙江省",
@@ -58,6 +59,11 @@ Component({
       label: "预估重量",
       isInput: true,
       placeholder: "0 公斤"
+    },
+    numberList: {
+      label: "预估件数",
+      isInput: true,
+      placeholder: "0 件"
     },
     volumeList: {
       label: "预估体积",
@@ -199,6 +205,11 @@ Component({
         weight: e.detail.sonParam
       })
     },
+    getNumber: function (e) {
+      this.setData({
+        number: e.detail.sonParam
+      })
+    },
     // senderAddressSelect: function(){
     //   var url = getCurrentPages()[getCurrentPages().length - 1].route.slice(6)
     //   console.log(getCurrentPages(),url)
@@ -265,12 +276,18 @@ Component({
     },
     order: function(){
       var that = this
+      var id
+      // 京东可发全国，其余快递只能永康，返回id
+      if(that.data.expressArray[that.data.expressIndex].value == '京东'){
+        id = 1
+      }else{
+        id = 2
+      }
       var params = {
-        order_amount: 0,
-        setting1: 0,
-        setting2: 0,
-        setting3: 0,
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        setting1: that.data.expressArray[that.data.expressIndex].id,
+        setting2: id,
+        setting3: that.data.weight,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       console.log(params)

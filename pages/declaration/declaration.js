@@ -136,7 +136,7 @@ Component({
         order_amount: that.data.priceItem.totalPrice,
         setting1: that.data.amount,
         setting2: that.data.addressArray[that.data.addressSelect].id,
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       console.log(params)

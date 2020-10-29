@@ -184,7 +184,7 @@ Component({
         setting3: that.data.radioChecked ? "1" : "0",
         setting4: that.data.array[that.data.index].id,
         // setting5: that.data.index
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       wx.showLoading({

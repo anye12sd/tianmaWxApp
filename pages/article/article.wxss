@@ -64,3 +64,62 @@ page{
 .article{
   padding: 30rpx;
 }
+
+.swiper-box{
+  margin-top: 60rpx;
+  width: 100%;
+  height: 462rpx;
+  border-radius: 8rpx;
+}
+.swiper swiper swiper-item{
+  border-radius: 8rpx;
+}
+.swiper{
+  height: 100%;
+  position: relative;
+  z-index: 10;
+  border-radius: 8rpx;
+  margin: 0 30rpx;
+}
+.swiper swiper{
+  height: 100%;
+  border-radius: 8rpx;
+}
+.swiper-item{
+  border-radius: 8rpx;
+}
+.swiper-img{
+  width: 100%;
+  height: 462rpx;
+  border-radius: 8px;
+}
+/*用来包裹所有的小圆点  */
+
+.dots {
+  width: 156rpx;
+  height: 36rpx;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 320rpx;
+  bottom: 20rpx;
+}
+
+/*未选中时的小圆点样式 */
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  background-color: white;
+}
+
+/*选中以后的小圆点样式  */
+
+.dot.active {
+  width: 32rpx;
+  height: 16rpx;
+  background-color: #376ee8;
+  border-radius: 15px;
+}

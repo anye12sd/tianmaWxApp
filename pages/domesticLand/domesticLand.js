@@ -162,7 +162,7 @@ Component({
         setting2: that.data.endArray[that.data.endSelected].id,
         setting3: that.data.box,
         setting4: that.data.boxTypeArray[that.data.boxTypeIndex].id,
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       console.log(params)

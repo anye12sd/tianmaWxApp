@@ -1,5 +1,24 @@
 <!--pages/articleList/articleList.wxml-->
 <view class="container">
+  <view class="swiper-box" wx-if="{{background.length}}">
+    <view class="page-section page-section-spacing swiper">
+      <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{currentSwiper}}"
+        bindchange="swiperChange">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item">
+              <image src="{{item}}" class="swiper-img"></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{background}}" wx:key="*this">
+          <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </view>
   <view class="article-box">
     <view class="article-children-title-box" wx:if="{{articleChildrenList.length}}">
       <view class="article-children-title">{{currentItem.title}}的产品介绍</view>

@@ -1,6 +1,6 @@
 const {
   baseUrl
-} = require('./env.js').dev
+} = require('./env.js').prod
 const app = getApp();
 // 专用域名
 module.exports = {

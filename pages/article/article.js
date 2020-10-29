@@ -12,6 +12,11 @@ Component({
    * 组件的初始数据
    */
   data: {
+    background: [],
+    autoplay: false,
+    interval: 2000,
+    duration: 500,
+    currentSwiper: 0,
     articleChildrenList: [],
     activeView: 0,
     currentItem: {
@@ -54,6 +59,7 @@ Component({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
             "currentItem.title": res.data[0].title,
             "currentItem.content": res.data[0].content.replace(/<img/gi, '<img style="max-width:100%;height:auto;float:left;display:block" '),
+            background: res.data[0].cover,
           })
           console.log(that.data.currentItem.content)
         }else{
@@ -62,6 +68,11 @@ Component({
             icon: 'none'
           })
         }
+      })
+    },
+    swiperChange: function (e) {
+      this.setData({
+        currentSwiper: e.detail.current
       })
     },
     toArticle: function(e){
@@ -77,6 +88,7 @@ Component({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
             "currentItem.title": res.data[0].title,
             "currentItem.content": res.data[0].content,
+            background: res.data[0].cover,
           })
         }else{
           wx.showToast({

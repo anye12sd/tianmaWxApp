@@ -368,7 +368,7 @@ Component({
         setting2: that.data.carArray[that.data.car].id,
         setting3: that.data.senderAddressList.address,
         setting4: that.data.receiverAddressList.address,
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       wx.showLoading({

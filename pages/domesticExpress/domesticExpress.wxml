@@ -23,18 +23,20 @@
   <view class="input-form">
     <formInput dataList="{{weightList}}" bind:getValue="getWeight"></formInput>
     <!-- <view class="divider"></view>
+    <formInput dataList="{{numberList}}" bind:getValue="getNumber"></formInput> -->
+    <!-- <view class="divider"></view>
     <formInput dataList="{{volumeList}}" bind:getValue="getVloume"></formInput> -->
   </view>
   <view class="price-list-box" wx:if="{{queryPrice.length}}">
     <view class="flex flex-wrap price-list">
-      <view class="from flex-1">发货区</view>
-      <view class="to flex-1">收货区</view>
+      <!-- <view class="from flex-1">发货区</view> -->
+      <view class="to">收货区</view>
       <view class="price flex-1">价格</view>
     </view>
     <block wx:for="{{queryPrice}}" wx:key="index">
       <view class="flex flex-wrap price-list">
-        <view class="from flex-1">{{showProvince}}</view>
-        <view class="to flex-1">{{item.district_to}}</view>
+        <!-- <view class="from flex-1">{{showProvince}}</view> -->
+        <view class="to">{{item.district_to}}</view>
         <view class="price flex-1">{{item.price}}</view>
       </view>
     </block>

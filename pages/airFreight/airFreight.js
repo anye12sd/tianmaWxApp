@@ -199,7 +199,7 @@ Component({
         setting4: that.data.weight,
         setting5: that.data.declearRadioChecked ? 2 : 1,
         setting6: that.data.amount,
-        nick_name: wx.getStorageSync('uesrInfo').nickName,
+        nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone,
       }
       console.log(params)

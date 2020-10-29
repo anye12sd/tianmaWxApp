@@ -54,7 +54,7 @@ Component({
             //     wx.setStorageSync('token', res.data.data.token)
             //   }
             // })
-            wx.setStorageSync('uesrInfo', {
+            wx.setStorageSync('userInfo', {
               nickName: e.detail.userInfo.nickName,
               avatarUrl: e.detail.userInfo.avatarUrl
             })

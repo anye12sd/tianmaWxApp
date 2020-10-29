@@ -265,7 +265,7 @@ Component({
           setting6: that.data.priceItem.rmbPrice || 0,
           setting7: that.data.boxTypeArray[that.data.boxTypeIndex].id,
           district_from: that.data.loadStartArray[that.data.loadStartIndex].value,
-          nick_name: wx.getStorageSync('uesrInfo').nickName,
+          nick_name: wx.getStorageSync('userInfo').nickName,
           mobile: that.data.phone,
         }
       }else{
@@ -278,7 +278,7 @@ Component({
           setting5: that.data.amount,
           setting6: 0,
           setting7: that.data.boxTypeArray[that.data.boxTypeIndex].id,
-          nick_name: wx.getStorageSync('uesrInfo').nickName,
+          nick_name: wx.getStorageSync('userInfo').nickName,
           mobile: that.data.phone,
         }
       }
