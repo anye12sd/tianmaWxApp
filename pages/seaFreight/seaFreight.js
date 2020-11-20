@@ -59,7 +59,7 @@ Component({
       isRadio: true
     },
     onLoadRadio: {
-      label: "是否包含国内运输",
+      label: "是否包含集装箱运输",
       isRadio: true
     },
     AmountList:{
@@ -205,6 +205,7 @@ Component({
           setting1: that.data.loadStartArray[that.data.loadStartIndex].value,
           setting2: that.data.loadEndArray[0].value,
           setting3: that.data.box,
+          setting4: that.data.boxTypeArray[that.data.boxTypeIndex].id,
         }
         wx.showLoading({
           title: '请等待',

@@ -42,7 +42,8 @@
     </block>
   </view>
   <view class="addNewAddress">
-    <text bindtap="getOrderPrice">询价</text>
+    <button wx:if="{{hasPhoneNum}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="order-btn">询价</button>
+    <text wx:else bindtap="getOrderPrice">{{queryPrice.length ? '重新询价' : '询价'}}</text>
   </view>
   <template is="areaData" data="{{...item}}" />
 </view>

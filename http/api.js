@@ -58,7 +58,7 @@ module.exports = {
     return request("/inquiry/" + data, "POST", params);
   },
   getOrderDetail: (data) => {
-    // 查询订单单价
+    // 查询指定订单
     return request("/order/" + data, "GET");
   },
   postOrder: (data, params) => {

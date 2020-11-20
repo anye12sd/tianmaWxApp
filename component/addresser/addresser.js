@@ -34,6 +34,8 @@ Component({
       var type = e.currentTarget.dataset.type
       var selectParams = {'type': type, 'addressNew': true}
       wx.setStorageSync('addressNew', JSON.stringify(selectParams))
+      //无下列代码会出现网络货运-添加地址返回后地址栏为空的bug
+      wx.setStorageSync('AddressSelect', JSON.stringify(selectParams))
       wx.navigateTo({
         url: '../addressEdit/addressEdit'
       })

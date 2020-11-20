@@ -3,3 +3,18 @@
   background: #f9f9f9;
   padding-bottom: 260rpx;
 }
+.car-desc{
+  padding: 0 60rpx;
+  padding-top: 20rpx;
+  font-size: 30rpx;
+}
+.car-img{
+  padding: 0 60rpx;
+  width: 60vw;
+  height: 45vw;
+  margin-top: 16rpx;
+  margin-bottom: 16rpx;
+}
+.car-img-box{
+  text-align: center;
+}

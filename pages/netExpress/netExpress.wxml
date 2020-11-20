@@ -14,9 +14,9 @@
   <view class="input-form">
     <formInput dataList="{{carSelect}}" selectArray="{{newCarArray}}" bind:getSelectValue="getCarSelectValue"></formInput>
     <map id="navi_map" longitude="{{markers[0].longitude}}" latitude="{{markers[0].latitude}}" scale="12" markers="{{markers}}" polyline="{{polyline}}" wx:if="{{mapShow}}"></map>
-    <view class="car-desc" wx-if="{{carArray[car].desc}}">{{carArray[car].desc}}</view>
-    <view class="car-img-box" wx-if="{{carArray[car].pic}}">
-      <image class="car-img" src="{{carArray[car].pic}}"></image>
+    <view class="car-desc" wx-if="{{newCarArray[car].desc}}">{{newCarArray[car].desc}}</view>
+    <view class="car-img-box" wx-if="{{newCarArray[car].pic}}">
+      <image class="car-img" src="{{newCarArray[car].pic}}"></image>
     </view>
   </view>
   <view class="price-box">

@@ -30,7 +30,7 @@
             <text>预估费用</text>
           </view>
           <view class="check-price">
-            <block wx:if="{{item.order_type == 5 || item.order_type == 7}}">
+            <block wx:if="{{item.order_type == 5 || item.order_type == 7 || item.order_type == 6}}">
               <text wx:if="{{item.rmb_price}}">$ {{item.order_amount}} +￥ {{item.rmb_price}}</text>
               <text wx:else>$ {{item.order_amount}}</text>
             </block>

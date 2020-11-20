@@ -19,6 +19,7 @@ Component({
    */
   data: {
     orderList,
+    freshFlag: true,
     page: 1,
     status: "",
     searchValue: "",
@@ -82,7 +83,8 @@ Component({
         console.log(res)
         that.setData({
           orderList: that.data.orderList.concat(res.data.list),
-          totalPage: res.data.total_page
+          totalPage: res.data.total_page,
+          freshFlag: true
         })
         if(res.data.total == 0){
           wx.showToast({
@@ -147,7 +149,7 @@ Component({
       // console.log(that.data.allHeight, that.data.clientHight)
       if (that.data.allHeight - that.data.clientHight <= (e.scrollTop + 1)) { // 判断是否滚动动到底部
         console.log("到底了")
-        if (!that.data.noMore) {
+        if (!that.data.noMore && that.data.freshFlag) {
           const page = that.data.page + 1
           if (page > that.data.totalPage) {
             wx.showToast({
@@ -160,7 +162,8 @@ Component({
           }
           console.log(page)
           that.setData({
-            page: page
+            page: page,
+            freshFlag: false
           })
           that.getOrder()
         }

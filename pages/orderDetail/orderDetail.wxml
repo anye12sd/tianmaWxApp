@@ -40,8 +40,9 @@
   <view class="input-form">
     <view class="flex flex-wrap order-detail-box">
       <text>预估费用</text>
-      <block wx:if="{{orderDetailList.order_type == 5 || orderDetailList.order_type == 7}}">
-        <text class="check-price">$ {{orderDetailList.order_amount}}</text>
+      <block wx:if="{{orderDetailList.order_type == 5 || orderDetailList.order_type == 7 || orderDetailList.order_type == 6}}">
+        <text class="check-price" wx:if="{{orderDetailList.rmb_price}}">$ {{orderDetailList.order_amount}} +￥{{orderDetailList.rmb_price}}</text>
+        <text class="check-price" wx:else>$ {{orderDetailList.order_amount}}</text>
       </block>
       <block wx:else>
         <text class="check-price">￥ {{orderDetailList.order_amount}}</text>
@@ -51,7 +52,13 @@
       <view class="divider"></view>
       <view class="flex flex-wrap order-detail-box">
         <text>已确认费用</text>
+        <block wx:if="{{orderDetailList.order_type == 5 || orderDetailList.order_type == 7 || orderDetailList.order_type == 6}}">
+        <text class="check-price" wx:if="{{orderDetailList.rmb_price}}">$ {{orderDetailList.real_amount}} +￥{{orderDetailList.rmb_price}}</text>
+        <text class="check-price" wx:else>$ {{orderDetailList.real_amount}}</text>
+      </block>
+      <block wx:else>
         <text class="check-price">￥ {{orderDetailList.real_amount}}</text>
+      </block>
       </view>
     </block>
     <block wx:if="{{orderDetailList.order_status == 3}}">

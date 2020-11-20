@@ -15,6 +15,7 @@ Component({
    */
   data: {
     addressList: [],
+    freshFlag: true,
     searchValue: "",
     page: 1,
     clientHight: "",
@@ -64,7 +65,8 @@ Component({
         if (res.code === 0) {
           that.setData({
             addressList: that.data.addressList.concat(res.data.list),
-            totalPage: res.data.total_page
+            totalPage: res.data.total_page,
+            freshFlag: true
           })
           if(res.data.total == 0){
             wx.showToast({
@@ -157,7 +159,7 @@ Component({
       // console.log(that.data.allHeight, that.data.clientHight)
       if (that.data.allHeight - that.data.clientHight <= (e.scrollTop - 39)) { // 判断是否滚动动到底部
         console.log("到底了")
-        if (!that.data.noMore) {
+        if (!that.data.noMore && that.data.freshFlag) {
           const page = that.data.page + 1
           if (page > that.data.totalPage) {
             wx.showToast({
@@ -172,7 +174,8 @@ Component({
           console.log(page)
           that.setData({
             isMore: true,
-            page: page
+            page: page,
+            freshFlag: false
           })
           that.getList()
         }

@@ -55,6 +55,15 @@ Component({
           that.setData({
             areaText: '发货区域',
           })
+          if(wx.getStorageSync("location")){
+            that.setData({
+              province: wx.getStorageSync("location").province,
+              city: wx.getStorageSync("location").city,
+              county: wx.getStorageSync("location").district,
+              showAddress: true,
+            })
+            console.log(that.data.province)
+          }
         }
         that.setData({
           addressNewList: addressNew,

@@ -22,8 +22,6 @@ Component({
    */
   methods: {
     onLoad: function () {
-      console.log(app.globalData.userInfo)
-      console.log(wx.getStorageSync('userInfo'))
       if (app.globalData.userInfo || wx.getStorageSync('userInfo')) {
         console.log(345)
         this.setData({
@@ -86,7 +84,6 @@ Component({
     },
     toPage: function (e) {
       var orderType = e.currentTarget.dataset.ordertype || ""
-      console.log(e.currentTarget.dataset.ordertype, orderType)
       var page = e.currentTarget.dataset.page
       if (orderType) {
         wx.navigateTo({

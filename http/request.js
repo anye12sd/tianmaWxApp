@@ -15,15 +15,20 @@ module.exports = {
     const token = wx.getStorageSync('token') ? wx.getStorageSync('token') : ""
     return new Promise((resolve, reject) => {
       console.log('url请求', baseUrl, url);
-      if(url != '/login' && url !='/layout' && url !='/cover' && url !='/banner' && url.indexOf('/article/') == '-1' && !token){
+      if(url != '/login' && url != '/layout' && url !='/cover' && url !='/banner' && url.indexOf('/article/') == '-1' && !token){
         wx.showToast({
           title: "请先登录",
           icon: 'none', //图标，支持"success"、"loading" 
           duration: 2000, //提示的延迟时间，单位毫秒，默认：1500 
           mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false 
-        })
-        wx.redirectTo({
-          url: '../login/login'
+          success: function () {
+            setTimeout(function () {
+              //要延时执行的代码
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000) //延迟时间
+          }
         })
         return false
       }

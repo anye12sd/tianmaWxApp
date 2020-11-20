@@ -99,7 +99,9 @@ Component({
           phone: phone
         })
       }
-      that.getEmun()
+      if(!that.data.carArray.length){
+        that.getEmun()
+      }
       that.checkSelectedAddress()
     },
     getEmun() {
@@ -180,7 +182,7 @@ Component({
     },
     getVolume: function (e) {
       // 筛选体积大于装车体积的车辆，如果没有，返回最大体积车辆
-      let newArray = this.data.carArray.filter(item => item.volume >= e.detail.sonParam )
+      let newArray = this.data.carArray.filter(item => item.volume > e.detail.sonParam )
       if(e.detail.sonParam > this.data.volumeMax){
         newArray = this.data.carArray.filter(item => item.volume == this.data.volumeMax )
       }
@@ -192,7 +194,7 @@ Component({
     },
     getWeight: function (e) {    
       // 筛选载重大于装车重量的车辆，如果没有，返回最大载重车辆
-      let newArray = this.data.carArray.filter(item => item.weight >= e.detail.sonParam )
+      let newArray = this.data.carArray.filter(item => item.weight > e.detail.sonParam )
       if(e.detail.sonParam > this.data.weightMax){
         newArray = this.data.carArray.filter(item => item.weight == this.data.weightMax )
       }
@@ -219,15 +221,13 @@ Component({
       })
     },
     getOrderPrice: function () {
-      // console.log(3454)
       var that = this
       that.getLocation(that.data.senderAddressList.address, "sender")
       that.getLocation(that.data.receiverAddressList.address, "receiver")
     },
     getLocation: function (address, type) {
-      console.log(address)
       var that = this
-      if(!that.data.carArray[that.data.car].id){
+      if(!that.data.newCarArray[that.data.car].id){
         wx.showToast({
           title: '请选择车型',
           icon: 'none'
@@ -328,16 +328,17 @@ Component({
     },
     getOrder: function () {
       var that = this
-      if(!that.data.carArray[that.data.car].id){
+      if(!that.data.newCarArray[that.data.car].id){
         wx.showToast({
           title: '请选择车型',
           icon: 'none'
         })
         return false
       }
+      let distance = [Math.round(parseFloat(that.data.distance) * 0.001),Math.round(parseFloat(that.data.distance) * 0.001) + 30]
       var params = {
-        setting1: parseFloat(that.data.distance) * 0.001,
-        setting2: that.data.carArray[that.data.car].id,
+        setting1: Math.round(parseFloat(that.data.distance) * 0.001),
+        setting2: that.data.newCarArray[that.data.car].id,
       }
       wx.showLoading({
         title: '请等待',
@@ -365,7 +366,7 @@ Component({
       var params = {
         order_amount: that.data.priceItem.totalPrice,
         setting1: parseFloat(that.data.distance) * 0.001,
-        setting2: that.data.carArray[that.data.car].id,
+        setting2: that.data.newCarArray[that.data.car].id,
         setting3: that.data.senderAddressList.address,
         setting4: that.data.receiverAddressList.address,
         nick_name: wx.getStorageSync('userInfo').nickName,

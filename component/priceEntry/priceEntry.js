@@ -67,7 +67,8 @@ Component({
                 if (res.code == 0) {
                   wx.setStorageSync('phone', res.data.phone_number)
                   that.setData({
-                    hasPhoneNum: false
+                    hasPhoneNum: false,
+                    phone: res.data.phone_number
                   })
                   wx.hideLoading()
                 } else {

@@ -23,7 +23,7 @@ var getOrderType = function (type) {
       status = "国际铁路"
       break;
     case 8:
-      status = "国内陆路"
+      status = "集装箱运输"
       break;
     case 9:
       status = "报关"
@@ -46,31 +46,31 @@ var getorderListIcon = function (type) {
   var status
   switch (type) {
     case 1:
-      status = "../../img/icon_02.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602231916.png"
       break;
     case 2:
-      status = "../../img/icon_01.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602231956.png"
       break;
     case 3:
-      status = "../../img/icon_03.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602231993.png"
       break;
     case 4:
-      status = "../../img/icon_04.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232023.png"
       break;
     case 5:
-      status = "../../img/icon_05.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232060.png"
       break;
     case 6:
-      status = "../../img/icon_08.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232137.png"
       break;
     case 7:
-      status = "../../img/icon_06.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232085.png"
       break;
     case 8:
-      status = "../../img/icon_07.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232125.png"
       break;
     case 9:
-      status = "../../img/icon_11.png"
+      status = "http://175.24.135.230/tianma/api/pic/1602232161.png"
       break;
   }
   return status

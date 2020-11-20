@@ -43,7 +43,7 @@ Component({
     priceItem: {
       totalPrice: "--",
       showOrderBtn: false,
-      text: "本费用为预估费用，仅供参考"
+      text: "不包含提箱费等相关杂费，仅供参考"
     }
   },
 

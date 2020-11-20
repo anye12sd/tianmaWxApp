@@ -150,6 +150,9 @@
   margin-top: 30rpx;
   width: calc(100vw - 40rpx);
 }
+.deliver-way-text{
+  font-size: 32rpx;
+}
 .deliver-way{
   margin-top: 30rpx;
   width: calc(50% - 98rpx);

@@ -59,6 +59,7 @@ Component({
     priceItem: {
       totalPrice: "--",
       showOrderBtn: false,
+      flag: 6,
       text: "本费用为预估费用，仅供参考"
     }
   },

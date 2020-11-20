@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/domesticExpress/domesticExpress",
     "pages/ad/ad",
     "pages/index/index",
-    "pages/domesticExpress/domesticExpress",
+    
     "pages/articleList/articleList",
     "pages/article/article",
     "pages/feedback/feedback",

@@ -204,9 +204,13 @@ Page({
       location: '' + longitude + ',' + latitude + '', //location的格式为'经度,纬度'
       success: function (data) {
         console.log(data);
-        app.globalData.selectCity = data[0].regeocodeData.addressComponent.district
+        var addressComponent = data[0].regeocodeData.addressComponent
+        var location = {province: addressComponent.province, city: addressComponent.city, district: addressComponent.district}
+        console.log(location)
+        wx.setStorageSync('location', location)
+        app.globalData.selectCity = addressComponent.district
         that.setData({
-          location: data[0].regeocodeData.addressComponent.district
+          location: addressComponent.district
         })
       },
       fail: function (info) {
@@ -278,9 +282,10 @@ Page({
     })
   },
   toSelectCity: function () {
-    var that = this
-    wx.navigateTo({
-      url: '../location/location?location=' + that.data.location
-    })
+    console.log(1)
+    // var that = this
+    // wx.navigateTo({
+    //   url: '../location/location?location=' + that.data.location
+    // })
   }
 })
