@@ -15,15 +15,17 @@
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item>
             <view class="swiper-item">
-              <image src="{{item}}" class="swiper-img"></image>
+              <image src="{{item + '!/both/800x520'}}" class="swiper-img"></image>
             </view>
           </swiper-item>
         </block>
       </swiper>
       <view class="dots">
-        <block wx:for="{{background}}" wx:key="*this">
-          <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
-        </block>
+        <view class="dots-box flex">
+          <block wx:for="{{background}}" wx:key="*this">
+            <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+          </block>
+        </view>
       </view>
     </view>
   </view>

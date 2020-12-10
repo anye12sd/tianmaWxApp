@@ -2,7 +2,8 @@
 const {
   getEmunList,
   postOrderInquiry,
-  postOrder
+  postOrder,
+  getTelephone
 } = require('../../http/api.js');
 Component({
   /**
@@ -16,6 +17,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    share_img: "",
     array: [],
     priceList: [],
     operateArray: [{
@@ -25,22 +27,30 @@ Component({
       id: 3,
       value: "组合操作"
     }],
+    tel: "",
     index: 0,
     radioChecked: true,
     hasPhoneNum: "",
-    month: "",
-    square: "",
+    month: 0,
+    square: 0,
+    day: 0,
+    deliver: 21,
     operateIndex: 0,
     showShadow: false,
     phone: "",
     monthList: {
-      label: "月数",
-      placeholder: "0 个月",
+      label: "月数（月）",
+      placeholder: "0",
       isInput: true
     },
     squareList: {
-      label: "平方数",
-      placeholder: "0 平方",
+      label: "平方数（m²）",
+      placeholder: "0",
+      isInput: true
+    },
+    dayList: {
+      label: "天数（天）",
+      placeholder: "0",
       isInput: true
     },
     hasService: {
@@ -58,7 +68,7 @@ Component({
     priceItem: {
       totalPrice: "--",
       showOrderBtn: false,
-      text: "不包含单品/组合发货费用，仅供参考"
+      text: "价格已含税，不包含单品/组合发货费用，仅供参考"
     }
   },
 
@@ -68,8 +78,11 @@ Component({
   methods: {
     onShow: function () {
       var that = this
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       const phone = wx.getStorageSync('phone') ? wx.getStorageSync('phone') : ""
-      console.log(phone)
+      // console.log(phone)
       if (!phone) {
         that.setData({
           hasPhoneNum: true,
@@ -82,6 +95,27 @@ Component({
         })
       }
       that.getEmun()
+      that.getTel()
+    },
+    getTel() {
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      getTelephone('fixed_lease').then(res => {
+        // console.log(res)
+        if (res.code == 0) {
+          that.setData({
+            tel: res.data.kefu_telephone
+          })
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
     },
     getEmun() {
       var that = this
@@ -89,7 +123,7 @@ Component({
         title: '加载中',
       })
       getEmunList('fixed_lease').then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 0) {
           that.setData({
             'deliverWayList.label': res.data.list[0].name,
@@ -106,7 +140,7 @@ Component({
       })
     },
     getSelectValue: function (e) {
-      console.log(e.detail.sonParam)
+      // console.log(e.detail.sonParam)
       this.setData({
         index: e.detail.sonParam
       })
@@ -123,7 +157,7 @@ Component({
       })
     },
     getMonth: function (e) {
-      console.log(e.detail.sonParam)
+      // console.log(e.detail.sonParam)
       this.setData({
         month: e.detail.sonParam
       })
@@ -133,11 +167,39 @@ Component({
         square: e.detail.sonParam
       })
     },
+    getDay: function (e) {
+      var that = this
+      that.setData({
+        day: e.detail.sonParam,
+      })
+      // if(e.detail.sonParam > 31){
+      //   wx.showToast({
+      //     title: '天数不得大于31天',
+      //     icon: 'none',
+      //     success: function(){
+      //       setTimeout(function(){
+      //         that.setData({
+      //           day: 21,
+      //           "dayList.placeholder": 21
+      //         })
+      //       }, 1000)
+      //     }
+      //   })
+      // }
+    },
     getOrderPrice: function () {
       var that = this
-      if (!that.data.square || !that.data.month) {
+      // 平方数不能为空，天数和月数可以有一项为空
+      if (!that.data.square || (!that.data.month && !that.data.day)) {
         wx.showToast({
           title: '请先完善表单',
+          icon: 'none'
+        })
+        return false
+      }
+      if (that.data.day > 30) {
+        wx.showToast({
+          title: '天数不得大于30天',
           icon: 'none'
         })
         return false
@@ -145,6 +207,7 @@ Component({
       var params = {
         setting1: that.data.month,
         setting2: that.data.square,
+        setting3: that.data.day,
         // setting3: that.data.radioChecked ? "1" : "0",
         // setting4: that.data.radioChecked ? that.data.operateIndex : "",
         // setting5: that.data.index
@@ -152,8 +215,9 @@ Component({
       wx.showLoading({
         title: '请等待',
       })
+      // console.log(params)
       postOrderInquiry('fixed_lease', params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 0) {
           that.setData({
             "priceItem.totalPrice": res.data.total_price,
@@ -171,7 +235,8 @@ Component({
     },
     order: function () {
       var that = this
-      if (!that.data.square || !that.data.month) {
+      // 平方数不能为空，天数和月数可以有一项为空
+      if (!that.data.square || (!that.data.month && !that.data.day)) {
         wx.showToast({
           title: '请先完善表单',
           icon: 'none'
@@ -182,41 +247,58 @@ Component({
         order_amount: that.data.priceItem.totalPrice,
         setting1: that.data.month,
         setting2: that.data.square,
+        setting3: that.data.day,
         // setting3: that.data.radioChecked ? "1" : "0",
         // setting4: that.data.array[that.data.index].id,
         // setting5: that.data.index,
         nick_name: wx.getStorageSync('userInfo').nickName,
-        mobile: that.data.phone,
+        mobile: that.data.phone || wx.getStorageSync('phone'),
       }
-      wx.showLoading({
-        title: '请等待',
-      })
-      console.log(params)
-      postOrder('fixed_lease', params).then(res => {
-        console.log(res)
-        if (res.code == 0) {
+      // console.log(params)
+      wx.requestSubscribeMessage({
+        tmplIds: ['4BlfpmT4MXeNSSqzo_CIqtLaiHAiByVRbzOx_ifnmQI'],
+        success(res) {
+
+        },
+        fail(err) {
           wx.showToast({
-            title: '下单成功',
-            icon: 'success',
+            title: err.errMsg,
+            icon: 'none',
             duration: 2000,
             mask: true,
-            success: function () {
-              setTimeout(function () {
-                //要延时执行的代码
-                wx.navigateTo({
-                  url: '../orderList/orderList?status=1',
-                })
-              }, 1000) //延迟时间
+          })
+        },
+        complete() {
+          wx.showLoading({
+            title: '请等待',
+          })
+          postOrder('fixed_lease', params).then(res => {
+            // console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: '下单成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.navigateTo({
+                      url: '../orderList/orderList?status=1',
+                    })
+                  }, 1000) //延迟时间
+                }
+              })
+              that.setData({
+                showShadow: false,
+                "priceItem.showOrderBtn": false,
+              })
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
             }
-          })
-          that.setData({
-            showShadow: false,
-            "priceItem.showOrderBtn": false,
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
           })
         }
       })
@@ -236,6 +318,14 @@ Component({
           }
         }
       })
-    }
+    },
+    onShareAppMessage: async function () {
+      var that = this
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
+      }
+    },
   }
 })

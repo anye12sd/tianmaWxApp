@@ -1,7 +1,8 @@
 // pages/addressEdit/addressEdit.js
 const {
   postAddAddress,
-  putEditAddress
+  putEditAddress,
+  delAddress
 } = require('../../http/api.js');
 
 var model = require('../../component/model/model.js')
@@ -32,6 +33,7 @@ Component({
     province: "",
     city: "",
     county: "",
+    showDeleteBtn: false,
     item: {
       show: show
     },
@@ -46,7 +48,7 @@ Component({
       if(addressNew){
         // 新增地址或者从网络货运过来的
         addressNew = JSON.parse(addressNew)
-        console.log(addressNew)
+        // console.log(addressNew)
         if(addressNew.type == "receiver"){
           that.setData({
             areaText: '收货区域',
@@ -62,13 +64,14 @@ Component({
               county: wx.getStorageSync("location").district,
               showAddress: true,
             })
-            console.log(that.data.province)
+            // console.log(that.data.province)
           }
         }
         that.setData({
           addressNewList: addressNew,
           addressNew: addressNew.addressNew,
-          showInput: false
+          showInput: false,
+          showDeleteBtn: false
         })
       } 
       if (options.item) {
@@ -84,6 +87,7 @@ Component({
           county: item.district || "",
           addressDetail: item.address || "",
           switchChecked: item.is_default || "",
+          showDeleteBtn: true
         })
         wx.setNavigationBarTitle({
           title: '编辑地址',
@@ -102,7 +106,7 @@ Component({
     },
     //隐藏picker-view
     hiddenFloatView: function (e) {
-      console.log("id = " + e.target.dataset.id)
+      // console.log("id = " + e.target.dataset.id)
       model.animationEvents(this, 200, false, 400);
       //点击确定按钮更新数据(id=444是背后透明蒙版 id=555是取消按钮)
       if (e.target.dataset.id == 666) {
@@ -166,7 +170,7 @@ Component({
       }
     },
     editAddress: function () {
-      console.log("是编辑地址")
+      // console.log("是编辑地址")
       var that = this
       var id = that.data.addressId
       var setDefault = that.data.switchChecked ? "1" : "0"
@@ -180,7 +184,7 @@ Component({
         is_default: setDefault
       }
       putEditAddress(id, params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code === 0) {
           wx.showToast({
             title: "编辑成功",
@@ -218,7 +222,7 @@ Component({
         wx.setStorageSync('receiverAddressSelected', JSON.stringify(addressNewList))
       }
       postAddAddress(params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code === 0) {
           wx.showToast({
             title: "添加成功",
@@ -237,6 +241,35 @@ Component({
         }
       })
     },
+    deleteAddress: function(){
+      let that = this
+      wx.showModal({
+        title: '确定删除该地址？',
+        success: function (res) {
+          if (res.confirm) { //点击确定后
+            delAddress(that.data.addressId).then(res => {
+              // console.log(res)
+              if (res.code === 0) {
+                wx.showToast({
+                  title: "删除成功",
+                  icon: 'success', //图标，支持"success"、"loading" 
+                  duration: 1500, //提示的延迟时间，单位毫秒，默认：1500 
+                  mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false 
+                  success:function(){
+                    setTimeout(function () {
+                      //要延时执行的代码
+                      wx.navigateBack({
+                        delta: 0,
+                      })
+                    }, 1500) //延迟时间
+                  }
+                })
+              }
+            })
+          }
+        }
+      })
+    },
     addAddress: function () {
       var that = this
       var setDefault = that.data.switchChecked ? "1" : "0"
@@ -249,9 +282,9 @@ Component({
         address: that.data.addressDetail,
         is_default: setDefault
       }
-      console.log(params)
+      // console.log(params)
       postAddAddress(params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code === 0) {
           wx.showToast({
             title: "添加成功",

@@ -6,7 +6,15 @@ Component({
   properties: {
     dataList: Object,
     startArray: Array,
-    endArray: Array
+    railwayFlag: Boolean,
+    endArray: {
+      type: Array,
+      observer: function (news, olds, path) {
+        this.setData({
+          endIndex: 0
+        })
+      }
+    },
   },
 
   /**

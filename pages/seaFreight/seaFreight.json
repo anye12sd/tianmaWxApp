@@ -2,10 +2,11 @@
   "component": true,
   "usingComponents": {
     "formInput": "../../component/formInput/formInput",
+    "serviceBtn": "../../component/serviceBtn/serviceBtn",
     "locationSelect": "../../component/locationSelect/locationSelect",
     "priceEntry": "../../component/priceEntry/priceEntry"
   },
-  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarBackgroundColor": "#e60012",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "国际海运",
   "backgroundColor": "#f9f9f9",

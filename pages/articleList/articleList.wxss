@@ -23,8 +23,8 @@ page{
   margin: 0 30rpx
 }
 .scroll-view-title.active{
-  border-bottom: 2px solid #376ee8;
-  color: #376ee8;
+  border-bottom: 2px solid #e60012;
+  color: #e60012;
 }
 
 .swiper-box{
@@ -58,13 +58,17 @@ page{
 /*用来包裹所有的小圆点  */
 
 .dots {
-  width: 156rpx;
-  height: 36rpx;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: row;
+  height: 36rpx;
   position: absolute;
-  left: 320rpx;
   bottom: 20rpx;
+}
+
+.dots-box{
+  margin: 0 auto;
 }
 
 /*未选中时的小圆点样式 */
@@ -82,8 +86,8 @@ page{
 .dot.active {
   width: 32rpx;
   height: 16rpx;
-  background-color: #376ee8;
-  border-radius: 15px;
+  background-color: #e60012;
+  border-radius: 30rpx;
 }
 
 
@@ -143,4 +147,5 @@ page{
 }
 .article{
   padding: 30rpx;
+  text-align: justify;
 }

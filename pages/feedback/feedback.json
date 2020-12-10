@@ -1,7 +1,7 @@
 {
   "component": true,
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarBackgroundColor": "#e60012",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "问题反馈",
   "backgroundColor": "#f9f9f9",

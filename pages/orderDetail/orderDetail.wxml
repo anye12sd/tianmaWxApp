@@ -1,15 +1,15 @@
 <wxs src="../../utils/tools.wxs" module="tools"></wxs>
 <image src="../../img/orderDetail.png" class="order-detail-img"></image>
 <view class="container">
-  <block wx:if="{{orderDetailList.order_type == 4}}">
+  <!-- <block wx:if="{{orderDetailList.order_type == 4}}">
     <view class="input-form">
       <addresser addressList="{{senderAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
       <view class="divider"></view>
       <addresser addressList="{{receiverAddressList}}" showAddressSelect="{{showAddressSelect}}"></addresser>
     </view>
-  </block>
+  </block> -->
   <view class="input-form">
-    <view class="flex flex-wrap order-detail-box">
+    <view class="flex flex-wrap order-detail-box" bindtap='copyText' data-text="{{orderDetailList.order_id}}">
       <text>订单编号</text>
       <text class="order-detail-content">{{orderDetailList.order_id}}</text>
     </view>
@@ -27,13 +27,24 @@
   </view> -->
   <view class="input-form">
     <block wx:for="{{orderDetailList.detail.sets.columns.length}}" wx:key="index">
-      <block wx:if="{{orderDetailList.detail.sets.datas[index] && orderDetailList.detail.sets.datas[index] != 0}}">
+      <!-- 当datas的数值不为零的时候显示或者发货方式为是的时候显示 -->
+      <block wx:if="{{(orderDetailList.detail.sets.datas[index] && orderDetailList.detail.sets.datas[index] != 0 && (orderDetailList.detail.sets.columns[index - 1] != '发货方式' && orderDetailList.detail.sets.datas[index - 1] != '否'))}}">
         <view class="flex flex-wrap order-detail-box">
           <text>{{orderDetailList.detail.sets.columns[index]}}</text>
           <text
-            class="order-detail-content">{{orderDetailList.detail.sets.datas[index]}}{{orderDetailList.detail.sets.unit[index]}}</text>
+            class="order-detail-content">{{orderDetailList.detail.sets.columns[index] == '操作服务费用' && orderDetailList.detail.sets.datas[index] == '否' ? '' : orderDetailList.detail.sets.datas[index]}}{{orderDetailList.detail.sets.unit[index]}}</text>
         </view>
         <view class="divider" wx:if="{{orderDetailList.detail.sets.columns.length !== index + 1}}"></view>
+      </block>
+    </block>
+    <block wx:if="{{orderDetailList.size.length}}">
+      <block wx:for="{{orderDetailList.size.length}}" wx:key="index">
+        <view class="flex flex-wrap order-detail-box">
+          <text>{{orderDetailList.size[index].name}}</text>
+          <text
+            class="order-detail-content">{{orderDetailList.size[index].values}}{{orderDetailList.size[index].unit}}</text>
+        </view>
+        <view class="divider" wx:if="{{orderDetailList.size.length !== index + 1}}"></view>
       </block>
     </block>
   </view>
@@ -88,7 +99,8 @@
       </view>
     </block>
   </view>
-  <view class="flex service-box">
+  <serviceBtn tel="{{tel}}"></serviceBtn>
+  <!-- <view class="flex service-box">
     <button bindtap="tel" class="flex-1 phone-num">
       <image src="../../img/telephone.png"></image>
       客服电话
@@ -99,5 +111,5 @@
         在线客服
       </button>
     </view>
-  </view>
+  </view> -->
 </view>

@@ -36,15 +36,17 @@
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item>
             <view class="swiper-item">
-              <image src="{{item.url}}" class="swiper-img"></image>
+              <image src="{{item.url + '!/both/800x520'}}" class="swiper-img"></image>
             </view>
           </swiper-item>
         </block>
       </swiper>
       <view class="dots">
-        <block wx:for="{{background}}" wx:key="*this">
-          <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
-        </block>
+        <view class="dots-box flex">
+          <block wx:for="{{background}}" wx:key="*this">
+            <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+          </block>
+      </view>
       </view>
     </view>
   </view>
@@ -83,6 +85,7 @@
           <image src="{{item.icon}}"></image> {{item.title}}
         </view>
         <view class="deliver-way-subText">{{item.sub_title}}</view>
+        <view class="deliver-way-bottom"></view>
       </view>
     </block>
     <!-- <view class="deliver-way" bindtap="toPage" data-page="seaFreight">
@@ -114,6 +117,7 @@
         <view class="deliver-way-text">{{item.title}}</view>
         <view class="deliver-way-subText">{{item.sub_title}}</view>
         <image src="{{item.icon}}"></image>
+        <view class="index-order-btn">马上查询</view>
       </view>
     </block>
     <!-- <view class="deliver-way flex-basis deliver-way-last" bindtap="toPage" data-page="declaration">

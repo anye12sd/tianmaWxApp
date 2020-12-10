@@ -2,7 +2,8 @@
 const {
   getEmunList,
   postOrderInquiry,
-  postOrder
+  postOrder,
+  getTelephone
 } = require('../../http/api.js');
 Component({
   /**
@@ -16,8 +17,10 @@ Component({
    * 组件的初始数据
    */
   data: {
-    addressArray:["请选择","报关地1","报关地2","报关地3","报关地4","报关地5"],
+    share_img: "",
+    addressArray: ["请选择", "报关地1", "报关地2", "报关地3", "报关地4", "报关地5"],
     addressSelect: 0,
+    tel: "",
     amount: "",
     hasPhoneNum: "",
     phone: "",
@@ -26,15 +29,15 @@ Component({
       label: "报关地",
       isSelect: true
     },
-    AmountList:{
-      label: "票数",
-      placeholder: "0 票",
+    AmountList: {
+      label: "票数（票）",
+      placeholder: "0",
       isInput: true
     },
     priceItem: {
       totalPrice: "--",
       showOrderBtn: false,
-      text: "本费用为预估费用，仅供参考"
+      text: "本费用已含税，为预估费用，仅供参考"
     }
   },
 
@@ -42,14 +45,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onShow: function (){
+    onShow: function () {
       var that = this
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       const phone = wx.getStorageSync('phone') ? wx.getStorageSync('phone') : ""
-      console.log(phone)
+      // console.log(phone)
       if (!phone) {
         that.setData({
           hasPhoneNum: true,
-          phone:phone
+          phone: phone
         })
       } else {
         that.setData({
@@ -58,21 +64,42 @@ Component({
         })
       }
       that.getEmun()
+      that.getTel()
     },
-    getEmun(){
+    getTel() {
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      getTelephone('gateway').then(res => {
+        // console.log(res)
+        if (res.code == 0) {
+          that.setData({
+            tel: res.data.kefu_telephone
+          })
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    },
+    getEmun() {
       var that = this
       wx.showLoading({
         title: '加载中',
       })
       getEmunList('gateway').then(res => {
-        console.log(res)
-        if(res.code == 0){
+        // console.log(res)
+        if (res.code == 0) {
           that.setData({
             'addressList.label': res.data.list[0].name,
             addressArray: res.data.list[0].values
           })
           wx.hideLoading()
-        }else{
+        } else {
           wx.showToast({
             title: res.msg,
             icon: 'none'
@@ -81,13 +108,13 @@ Component({
       })
     },
     // 报关地
-    getSelectValue: function(e){
+    getSelectValue: function (e) {
       this.setData({
         addressSelect: e.detail.sonParam
       })
     },
     // 票数
-    getAmount: function(e){
+    getAmount: function (e) {
       this.setData({
         amount: e.detail.sonParam
       })
@@ -105,17 +132,17 @@ Component({
         setting1: that.data.amount,
         setting2: that.data.addressArray[that.data.addressSelect].id,
       }
-      console.log(params)
+      // console.log(params)
       postOrderInquiry('gateway', params).then(res => {
-        console.log(res)
-        if(res.code == 0){
+        // console.log(res)
+        if (res.code == 0) {
           that.setData({
             "priceItem.totalPrice": res.data.total_price,
             "priceItem.showOrderBtn": true,
             showShadow: true
           })
           wx.hideLoading()
-        }else{
+        } else {
           wx.showToast({
             title: res.msg,
             icon: 'none'
@@ -123,7 +150,7 @@ Component({
         }
       })
     },
-    order: function(){
+    order: function () {
       var that = this
       if (!that.data.amount) {
         wx.showToast({
@@ -137,37 +164,52 @@ Component({
         setting1: that.data.amount,
         setting2: that.data.addressArray[that.data.addressSelect].id,
         nick_name: wx.getStorageSync('userInfo').nickName,
-        mobile: that.data.phone,
+        mobile: that.data.phone || wx.getStorageSync('phone'),
       }
-      console.log(params)
-      wx.showLoading({
-        title: '请等待',
-      })
-      postOrder('gateway', params).then(res => {
-        console.log(res)
-        if(res.code == 0){
+      wx.requestSubscribeMessage({
+        tmplIds: ['4BlfpmT4MXeNSSqzo_CIqtLaiHAiByVRbzOx_ifnmQI'],
+        success(res) {
+
+        },
+        fail(err) {
           wx.showToast({
-            title: '下单成功',
-            icon: 'success',
+            title: err.errMsg,
+            icon: 'none',
             duration: 2000,
             mask: true,
-            success: function () {
-              setTimeout(function () {
-                //要延时执行的代码
-                wx.navigateTo({
-                  url: '../orderList/orderList?status=1',
-                })
-              }, 1000) //延迟时间
+          })
+        },
+        complete() {
+          wx.showLoading({
+            title: '请等待',
+          })
+          postOrder('gateway', params).then(res => {
+            // console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: '下单成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.navigateTo({
+                      url: '../orderList/orderList?status=1',
+                    })
+                  }, 1000) //延迟时间
+                }
+              })
+              that.setData({
+                showShadow: false,
+                "priceItem.showOrderBtn": false,
+              })
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
             }
-          })
-          that.setData({
-            showShadow: false,
-            "priceItem.showOrderBtn": false,
-          })
-        }else{
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
           })
         }
       })
@@ -187,6 +229,14 @@ Component({
           }
         }
       })
-    }
+    },
+    onShareAppMessage: async function () {
+      var that = this
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
+      }
+    },
   }
 })

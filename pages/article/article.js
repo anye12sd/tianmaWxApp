@@ -12,6 +12,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    share_img: "",
     background: [],
     autoplay: false,
     interval: 2000,
@@ -31,6 +32,9 @@ Component({
   methods: {
     onLoad: function(options){
       var that = this
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       that.getArticleDetail(options.id)
     },
     getArticleDetail: function(id){
@@ -97,6 +101,14 @@ Component({
           })
         }
       })
+    },
+    onShareAppMessage: async function () {
+      var that = this
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
+      }
     },
   }
 })

@@ -3,6 +3,8 @@
   <view class="input-form">
     <formInput dataList="{{monthList}}" bind:getValue="getMonth"></formInput>
     <view class="divider"></view>
+    <formInput deliver="{{deliver}}" dataList="{{dayList}}" bind:getValue="getDay"></formInput>
+    <view class="divider"></view>
     <formInput dataList="{{squareList}}" bind:getValue="getSquare"></formInput>
   </view>
   <!-- <view class="input-form">
@@ -20,5 +22,6 @@
     <priceEntry priceItem="{{priceItem}}" bind:getOrderPrice="getOrderPrice" bind:order="order" hasPhoneNum="{{hasPhoneNum}}"></priceEntry>
   </view>
   <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>
 

@@ -4,8 +4,7 @@
 </view>
 <view class="swiper-box">
   <view class="page-section page-section-spacing swiper">
-    <swiper autoplay="{{autoplay}}" duration="{{duration}}" current="{{currentSwiper}}"
-      bindchange="swiperChange">
+    <swiper autoplay="{{autoplay}}" duration="{{duration}}" current="{{currentSwiper}}" bindchange="swiperChange">
       <block wx:for="{{img}}" wx:key="*this">
         <swiper-item>
           <view class="swiper-item">
@@ -15,9 +14,11 @@
       </block>
     </swiper>
     <view class="dots">
-      <block wx:for="{{img}}" wx:key="*this">
-        <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
-      </block>
+      <view class="dots-box flex">
+        <block wx:for="{{img}}" wx:key="*this">
+          <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+        </block>
+      </view>
     </view>
   </view>
 </view>

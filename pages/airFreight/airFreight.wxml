@@ -4,7 +4,13 @@
     <locationSelect dataList="{{locationSelect}}" endArray="{{endArray}}" startArray="{{startArray}}" bind:getStartSelectValue="getStartSelectValue" bind:getEndSelectValue="getEndSelectValue" ></locationSelect>
   </view>
   <view class="input-form">
-    <formInput dataList="{{volumeList}}" bind:getValue="getVolume"></formInput>
+    <!-- <formInput dataList="{{volumeList}}" bind:getValue="getVolume"></formInput>
+    <view class="divider"></view> -->
+    <formInput dataList="{{lengthList}}" bind:getValue="getLength"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{wideList}}" bind:getValue="getWide"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{heightList}}" bind:getValue="getHeight"></formInput>
     <view class="divider"></view>
     <formInput dataList="{{weightList}}" bind:getValue="getWeight"></formInput>
   </view>
@@ -22,5 +28,6 @@
     <priceEntry priceItem="{{priceItem}}" hasPhoneNum="{{hasPhoneNum}}" bind:order="order" bind:getOrderPrice="getOrderPrice"></priceEntry>
   </view>
   <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>
 

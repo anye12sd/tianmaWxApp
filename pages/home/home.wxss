@@ -1,6 +1,7 @@
 /* pages/home/home.wxss */
 .container{
   background: #f9f9f9;
+  overflow-x: hidden;
 }
 .home-header{
   width: 100%;
@@ -37,7 +38,9 @@
   position: absolute;
   top:30rpx;
   left: 140rpx;
-  width: 100%;
+  right: 0;
+  width: calc(100vw - 170rpx);
+  text-align: left;
 }
 .login-btn{
   color: #fff;
@@ -45,6 +48,9 @@
   padding: 0; 
   background: transparent;
   width:120rpx !important;
+  text-align: left;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .home-info-username text{
   color: #fff;

@@ -3,7 +3,7 @@
   "usingComponents": {
     "parser":"../../component/parser/parser"
   },
-  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarBackgroundColor": "#e60012",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "服务介绍",
   "backgroundColor": "#f9f9f9",

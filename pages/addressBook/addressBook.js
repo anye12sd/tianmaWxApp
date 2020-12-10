@@ -49,6 +49,7 @@ Component({
         page: 1,
       })
       that.getList()
+      that.pageScrollToBottom()
     },
     getList: function () {
       wx.showLoading({
@@ -59,9 +60,9 @@ Component({
         page: that.data.page,
         key_words: that.data.searchValue
       }
-      console.log(params)
+      // console.log(params)
       getAddressList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code === 0) {
           that.setData({
             addressList: that.data.addressList.concat(res.data.list),
@@ -83,7 +84,7 @@ Component({
       })
     },
     toEditAddress: function (e) {
-      console.log(e.currentTarget.dataset.item)
+      // console.log(e.currentTarget.dataset.item)
       var item = e.currentTarget.dataset.item || ""
       if (item) {
         item.showAddress = true
@@ -117,7 +118,7 @@ Component({
     },
     search(e) {
       var that = this
-      console.log(e.detail)
+      // console.log(e.detail)
       that.setData({
         page: 1,
       })
@@ -157,8 +158,8 @@ Component({
       var that = this
       // console.log(e)
       // console.log(that.data.allHeight, that.data.clientHight)
-      if (that.data.allHeight - that.data.clientHight <= (e.scrollTop - 39)) { // 判断是否滚动动到底部
-        console.log("到底了")
+      if (that.data.allHeight - that.data.clientHight <= (e.scrollTop - 0)) { // 判断是否滚动动到底部
+        // console.log("到底了")
         if (!that.data.noMore && that.data.freshFlag) {
           const page = that.data.page + 1
           if (page > that.data.totalPage) {
@@ -171,7 +172,7 @@ Component({
             // })
             return false
           }
-          console.log(page)
+          // console.log(page)
           that.setData({
             isMore: true,
             page: page,

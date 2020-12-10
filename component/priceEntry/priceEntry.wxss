@@ -13,13 +13,14 @@
   padding-top: 40rpx;
 }
 .show-price-content{
-  color: #376ee8;
+  color: #e60012;
 }
 .explain{
   position: absolute;
   padding-top: 85rpx;
   font-size: 24rpx;
-  color: #969696
+  color: #969696;
+  width: 65%;
 }
 .order-btn{
   position: absolute;
@@ -30,7 +31,7 @@
   height: 80rpx !important;
   line-height: 80rpx !important;
   color:#fff;
-  background: #376ee8;
+  background: #e60012;
   border-radius: 8rpx;
   padding: 0 !important;
   font-weight: normal !important;

@@ -3,6 +3,10 @@ const {
 } = require('./request.js');
 // 基于业务封装的数据请求
 module.exports = {
+  getShareImg: () => {
+    // 获取分享封面图
+    return request("/share_img", "GET");
+  },
   getBannerList: () => {
     // 获取首页轮播图
     return request("/banner", "GET");
@@ -27,6 +31,14 @@ module.exports = {
     // 获取物流方式
     return request("/emun/"+ data, "GET");
   },
+  getRailwayDestination: (params) => {
+    // 获取铁路运输目的地
+    return request("/station/railway/", "GET", params);
+  },
+  getTelephone: (data) => {
+    // 获取手机号码
+    return request("/tel/"+ data, "GET");
+  },
   getAddressList: (params) => {
     // 获取地址列表
     return request("/address", "GET", params);
@@ -34,6 +46,10 @@ module.exports = {
   postAddAddress: (params) => {
     // 添加新收货地址
     return request("/address/", "POST", params);
+  },
+  delAddress: (data) => {
+    // 添加新收货地址
+    return request("/address/" + data, "DELETE");
   },
   putEditAddress: (data, params) => {
     // 编辑收货地址

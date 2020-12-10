@@ -21,7 +21,10 @@
   </view>
   <view class="input-address-box flex" wx:if="{{showInput}}">
     <view class="input-address-label switchClass">设为默认</view>
-    <switch class="flex-1" checked="{{switchChecked}}" color="#376ee8" bindchange="switchChange"/>
+    <switch class="flex-1" checked="{{switchChecked}}" color="#e60012" bindchange="switchChange"/>
+  </view>
+  <view wx:if="{{showDeleteBtn}}" class="input-address-box input-address-box-delete" bindtap="deleteAddress">
+    <text>删除该地址</text>
   </view>
   <view class="addNewAddress">
     <text bindtap="saveEdit">保存</text>

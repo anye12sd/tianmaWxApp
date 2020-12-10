@@ -30,7 +30,7 @@ page{
 .addNewAddress text{
   font-size: 32rpx;
   color: #fff;
-  background: #376ee8;
+  background: #e60012;
   display: block;
   text-align: center;
   height: 100rpx;

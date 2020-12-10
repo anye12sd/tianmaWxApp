@@ -1,0 +1,107 @@
+/* component/serviceBtn/serviceBtn.wxss */
+.menu-box {
+  position: fixed;
+  bottom: 40vw;
+  left: 30rpx;
+  width: 100rpx;
+  padding-bottom: 100rpx;
+}
+.menu-box .navbar {
+  z-index: 1000;
+  position: absolute;
+  bottom: 0rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 0rpx;
+  border-radius: 50%;
+}
+.menu-box .navbar>.btn {
+  padding: 25rpx;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.menu-box .navbar>.btn>.line {
+  height: 6rpx;
+  background-color: white;
+  margin: 0px 2rpx 6rpx 2rpx;
+  border-radius: 6rpx;
+}
+.menu-box .navbar>.btn>.title {
+  font-size: 20rpx;
+}
+.menu-box .active {
+  background-color: #e60012;
+  opacity: 0.8;
+}
+.menu-box .menu{
+  /* width: 100rpx; */
+  height: 100rpx;
+  /* overflow: hidden; */
+  position: relative;
+  /* margin: 0 auto; */
+  bottom: -100rpx;
+}
+.menu-box .menu>view {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 20rpx;
+  border-radius: 50%;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  font-size: 0rpx;
+  color: red;
+}
+.menu-box .menu>view text{
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  width:100%;
+  height: 100%;
+  color: white;
+  z-index: 10000;
+  font-size: 25rpx;
+}
+.phone-num{
+  width: 100rpx !important;
+  height: 100rpx !important;
+  border-radius: 50% !important;
+  opacity: 1;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: normal;
+  background: transparent;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 100rpx;
+}
+.service-button{
+  width: 100rpx !important;
+  height: 100rpx !important;
+  border-radius: 50% !important;
+  opacity: 1;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: normal;
+  background: transparent;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 100rpx;
+}
+
+.img-box image{
+  width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+}

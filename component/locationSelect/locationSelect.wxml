@@ -15,10 +15,27 @@
         </view>
       </picker>
     </view>
-    <view class="input-right-box">
-      <picker bindchange="bindEndPickerChange" value="{{endIndex}}" range="{{endArray}}" range-key="value">
+    <view wx:if="{{!endArray[0].to_station}}" class="input-right-box">
+      <!-- 铁路需要根据起始站选择终点站所以要用flag判断 -->
+      <block wx:if="{{railwayFlag}}">
+        <picker bindchange="bindEndPickerChange" value="{{endIndex}}" range="{{endArray}}" range-key="district_to">
+          <view class="picker">
+            {{endArray[endIndex].district_to}}
+          </view>
+        </picker>
+      </block>
+      <block wx:else>
+        <picker bindchange="bindEndPickerChange" value="{{endIndex}}" range="{{endArray}}" range-key="value">
+          <view class="picker">
+            {{endArray[endIndex].value}}
+          </view>
+        </picker>
+      </block>
+    </view>
+    <view wx:else>
+      <picker bindchange="bindEndPickerChange" value="{{endIndex}}" range="{{endArray}}" range-key="to_station">
         <view class="picker">
-          {{endArray[endIndex].value}}
+          {{endArray[endIndex].to_station}}
         </view>
       </picker>
     </view>

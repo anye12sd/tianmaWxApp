@@ -25,4 +25,5 @@
   </view>
   
   <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>

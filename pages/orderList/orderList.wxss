@@ -48,6 +48,11 @@ page{
   border-bottom: 1px solid #f5f5f5;
   padding-bottom: 12rpx;
 }
+.orderNo-copyBtn{
+  font-size: 28rpx;
+  color: #e60012;
+  text-align: right;
+}
 .order-detail{
   padding: 30rpx 0 ;
   border-bottom: 1px solid #f5f5f5;
@@ -82,7 +87,7 @@ page{
 }
 .check-price, .checked-price{
   font-size: 28rpx;
-  color: #376ee8;
+  color: #e60012;
 }
 .checked-price-box{
   padding: 20rpx 0;
@@ -91,7 +96,7 @@ page{
 .checked-price-btn a{
   font-size: 30rpx;
   color: #fff;
-  background: #376ee8;
+  background: #e60012;
   font-weight: normal;
   display: block;
   padding: 10rpx 30rpx;

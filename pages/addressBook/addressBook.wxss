@@ -42,9 +42,9 @@ page{
 .defaultLabel{
   font-size: 20rpx;
   padding: 0rpx 4rpx;
-  color: #376ee8;
+  color: #e60012;
   border-radius: 8rpx;
-  border: 1px solid #376ee8;
+  border: 1px solid #e60012;
   position: absolute;
   right:68rpx;
   top:2rpx
@@ -84,7 +84,7 @@ page{
 .addNewAddress text{
   font-size: 32rpx;
   color: #fff;
-  background: #376ee8;
+  background: #e60012;
   display: block;
   text-align: center;
   height: 100rpx;

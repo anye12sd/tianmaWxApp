@@ -1,7 +1,7 @@
 <!--pages/seaFreight/seaFreight.wxml-->
 <view class="container">
   <view class="input-form">
-    <locationSelect dataList="{{locationSelect}}" endArray="{{endArray}}" startArray="{{startArray}}" bind:getStartSelectValue="getStartSelectValue" bind:getEndSelectValue="getEndSelectValue" ></locationSelect>
+    <locationSelect dataList="{{locationSelect}}" railwayFlag="{{railwayFlag}}" endArray="{{endArray}}" startArray="{{startArray}}" bind:getStartSelectValue="getStartSelectValue" bind:getEndSelectValue="getEndSelectValue" ></locationSelect>
   </view>
   <view class="input-form">
     <formInput dataList="{{boxList}}" bind:getValue="getBox"></formInput>
@@ -9,7 +9,7 @@
     <formInput dataList="{{boxTypeList}}" selectArray="{{boxTypeArray}}" bind:getSelectValue="getBoxValue"></formInput>
     <view class="car-desc" wx-if="{{boxTypeArray[boxTypeIndex].desc}}">{{boxTypeArray[boxTypeIndex].desc}}</view>
     <view class="car-img-box" wx-if="{{boxTypeArray[boxTypeIndex].pic}}">
-      <image class="car-img" src="{{boxTypeArray[boxTypeIndex].pic}}"></image>
+      <image class="car-img" src="{{boxTypeArray[boxTypeIndex].pic}} + '!/both/800x520'"></image>
     </view>
   </view>
   <view class="input-form">
@@ -29,5 +29,6 @@
     <priceEntry priceItem="{{priceItem}}" hasPhoneNum="{{hasPhoneNum}}" bind:getOrderPrice="getOrderPrice" bind:order="order"></priceEntry>
   </view>
   <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>
 

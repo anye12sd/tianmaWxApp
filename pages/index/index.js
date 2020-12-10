@@ -15,6 +15,7 @@ var markersData = {
 };
 Page({
   data: {
+    share_img: "",
     hasLocationAuth: true,
     location: '金华市',
     userInfo: {},
@@ -48,6 +49,9 @@ Page({
   },
   onLoad: function () {
     var that = this
+    that.setData({
+      'share_img': wx.getStorageSync('share_img')
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -287,5 +291,29 @@ Page({
     // wx.navigateTo({
     //   url: '../location/location?location=' + that.data.location
     // })
-  }
+  },
+  onShareAppMessage: async function () {
+    var that = this
+    return {
+      title: '宏伟天马物流',
+      path: `/pages/ad/ad`,
+      imageUrl: that.data.share_img
+    }
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  // onShareAppMessage: function () {
+  //   return {
+  //     title: '宏伟天马物流1',    //自定义标题   string
+  //     path: `/pages/ad/ad`  //这个地址需要把页面路径拼接的参数发送出去,直写页面地址的话，别人进入会是空的页面
+  //   }
+  // },
+  // onShareTimeline: function(){
+  //   return {
+  //     title: '宏伟天马物流2', //字符串  自定义标题
+  //     // query: `id=${this.data.shop.shop_id}`,  //页面携带参数
+  //     imageUrl: 'http://www.haowu3.com/mobile/static/images/7.jpg'   //图片地址
+  //   }
+  // }
 })

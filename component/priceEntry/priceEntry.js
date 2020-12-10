@@ -32,6 +32,32 @@ Component({
       this.triggerEvent('order')
     },
     getPhoneNumber(e) {
+        wx.checkSession({
+          success () {
+            //session_key 未过期，并且在本生命周期一直有效
+            console.log('session_key 未过期')
+          },
+          fail () {
+            // session_key 已经失效，需要重新执行登录流程
+            console.log('session_key 已经失效')
+            wx.showToast({
+              title: "状态失效请重新登录",
+              icon: 'none', //图标，支持"success"、"loading" 
+              duration: 2000, //提示的延迟时间，单位毫秒，默认：1500 
+              mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false 
+              success: function () {
+                setTimeout(function () {
+                  //要延时执行的代码
+                  wx.redirectTo({
+                    url: '../login/login'
+                  })
+                }, 1000) //延迟时间
+              }
+            })
+            return false
+          }
+        })
+      console.log(e)
       var that = this
       var code
       wx.login({
@@ -40,6 +66,7 @@ Component({
             console.log(res)
             if (res.code) {
               code = res.code
+              console.log(code)
               console.log(e)
               console.log(e.detail.errMsg)
               console.log(e.detail.iv)
@@ -54,7 +81,7 @@ Component({
                 return false
               }
               const data = {
-                code: code,
+                // code: code,
                 iv: e.detail.iv,
                 encryptedData: e.detail.encryptedData
               }
@@ -70,6 +97,7 @@ Component({
                     hasPhoneNum: false,
                     phone: res.data.phone_number
                   })
+                  that.triggerEvent('getOrderPrice')
                   wx.hideLoading()
                 } else {
                   wx.showToast({

@@ -14,6 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    tel: "",
     showAddressSelect: false,  
     receiverAddressList: {
       "isSender": false,
@@ -45,31 +46,47 @@ Component({
       })
       var that = this;
       getOrderDetail(orderId).then(res => {
-        console.log(res)
+        // console.log(res)
         if(res.code == 0){
           that.setData({
-            orderDetailList: res.data
+            orderDetailList: res.data,
+            tel: res.data.kefu_telephone
           })
         }
         wx.hideLoading()
       })
     },
-    tel: function(){
-      wx.makePhoneCall({
-        phoneNumber: '13813813813',
-        // success: function(){
-        //   wx.showToast({
-        //     title: '拨打成功',
-        //     icon: 'success'
-        //   })
-        // },
-        // fail: function(){
-        //   wx.showToast({
-        //     title: '拨打失败',
-        //     icon: 'none'
-        //   })
-        // },
+    copyText: function (e) {
+      // console.log(e)
+      wx.setClipboardData({
+        data: e.currentTarget.dataset.text,
+        success: function (res) {
+          wx.getClipboardData({
+            success: function (res) {
+              wx.showToast({
+                title: '复制成功'
+              })
+            }
+          })
+        }
       })
-    }
+    },
+    // tel: function(){
+    //   wx.makePhoneCall({
+    //     phoneNumber: '13813813813',
+    //     // success: function(){
+    //     //   wx.showToast({
+    //     //     title: '拨打成功',
+    //     //     icon: 'success'
+    //     //   })
+    //     // },
+    //     // fail: function(){
+    //     //   wx.showToast({
+    //     //     title: '拨打失败',
+    //     //     icon: 'none'
+    //     //   })
+    //     // },
+    //   })
+    // }
   }
 })

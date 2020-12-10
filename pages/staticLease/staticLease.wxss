@@ -2,9 +2,9 @@
 page{
   height: 100%;
   background: #f9f9f9;
+  padding-bottom: 280rpx;
 }
 .container{
-  height: 100%;
   background: #f9f9f9;
 }
 .explain{
@@ -12,4 +12,9 @@ page{
   padding:0 60rpx;
   font-size: 30rpx;
   margin-top: 20rpx;
+}
+.input-form-explain{
+  padding: 0 60rpx;
+  padding-bottom: 20rpx;
+  font-size: 30rpx;
 }

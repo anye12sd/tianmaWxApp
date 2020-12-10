@@ -9,16 +9,19 @@
   <view class="input-form-box">
     <view class="input-form" wx:for="{{orderList}}" wx:key="index">
       <view class="orderNo-box">
-        <view class="orderNo">
-          编号：{{item.order_id}}
+        <view class="flex">
+          <view class="orderNo">
+            编号：{{item.order_id}}
+          </view>
+          <view class="orderNo-copyBtn flex-1" bindtap='copyText' data-text="{{item.order_id}}">复制</view>
         </view>
         <view class="order-detail flex" bindtap="toOrderDetail" data-orderid="{{item.order_id}}">
           <view class="order-detail-image">
-            <image src="{{tools.getorderListIcon(item.order_type)}}"></image>
+            <image src="{{item.icon}}"></image>
           </view>
           <view class="order-detail-text">
             <view>
-              <text>{{tools.getOrderType(item.order_type)}}</text>
+              <text>{{item.order_type_name}}</text>
             </view>
             <view class="checkTime">
               <text>询价时间：{{item.create_time}}</text>

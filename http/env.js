@@ -10,6 +10,6 @@ module.exports={
   },
   //线上url
   prod:{
-    baseUrl:"https://api.jihui88.net/tianma_app/wxapp"
+    baseUrl:"https://api.jihui88.net/tmapi/tianma_app/wxapp"
   }
 } 

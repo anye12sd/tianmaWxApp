@@ -2,7 +2,9 @@
 const {
   getEmunList,
   postOrderInquiry,
-  postOrder
+  postOrder,
+  getRailwayDestination,
+  getTelephone
 } = require('../../http/api.js');
 Component({
   /**
@@ -16,12 +18,14 @@ Component({
    * 组件的初始数据
    */
   data: {
+    share_img: "",
+    tel: "",
     startArray: [],
     endArray: [],
     loadEndArray: [],
     loadEndIndex: 0,
     loadStartArray: [],
-    boxTypeArray:[],
+    boxTypeArray: [],
     loadStartIndex: 0,
     startSelected: 0,
     endSelected: 0,
@@ -31,6 +35,7 @@ Component({
     hasPhoneNum: "",
     phone: "",
     onLoadRadioChecked: false,
+    railwayFlag:true,
     amount: 0,
     locationSelect: {
       start: "起运站",
@@ -43,11 +48,11 @@ Component({
       icon: "../../img/icon_07.png"
     },
     boxList: {
-      label: "装箱数",
-      placeholder: "0 箱",
+      label: "装箱数（箱）",
+      placeholder: "0",
       isInput: true
     },
-    boxTypeList:{
+    boxTypeList: {
       label: "集装箱类型",
       isSelect: true
     },
@@ -60,15 +65,16 @@ Component({
       isRadio: true
     },
     AmountList: {
-      label: "票数",
-      placeholder: "0 票",
+      label: "票数（票）",
+      placeholder: "0",
       isInput: true
     },
     priceItem: {
       totalPrice: "--",
       rmbPrice: "",
       showOrderBtn: false,
-      text: "不包含提箱费等相关杂费，仅供参考"
+      showUnit: "",
+      text: "价格已含税，不包含提箱费等相关杂费，仅供参考"
     }
   },
 
@@ -78,6 +84,9 @@ Component({
   methods: {
     onShow: function () {
       var that = this
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       const phone = wx.getStorageSync('phone') ? wx.getStorageSync('phone') : ""
       console.log(phone)
       if (!phone) {
@@ -93,23 +102,21 @@ Component({
       }
       that.getEmun()
       that.getLoadEmun()
+      that.getTel()
     },
-    getEmun() {
+    getTel() {
       var that = this
       wx.showLoading({
         title: '加载中',
       })
-      getEmunList('railway').then(res => {
-        console.log(res,res.data)
-        if(res.code == 0){
+      getTelephone('railway').then(res => {
+        console.log(res)
+        if (res.code == 0) {
           that.setData({
-            startArray: res.data.list[0].values,
-            endArray: res.data.list[1].values,
-            loadEndArray: [res.data.list[0].values[0]],
-            boxTypeArray: res.data.list[3].values,
+            tel: res.data.kefu_telephone
           })
           wx.hideLoading()
-        }else{
+        } else {
           wx.showToast({
             title: res.msg,
             icon: 'none'
@@ -117,7 +124,53 @@ Component({
         }
       })
     },
-    getLoadEmun(){
+    getEmun() {
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      getEmunList('railway').then(res => {
+        console.log(res, res.data)
+        if (res.code == 0) {
+          that.setData({
+            startArray: res.data.list[0].values,
+            // endArray: res.data.list[1].values,
+            loadEndArray: [res.data.list[0].values[0]],
+            boxTypeArray: res.data.list[3].values,
+          })
+          that.getDestination(res.data.list[0].values[0].value)
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    },
+    getDestination: function(value){
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      let params = {"from": value}
+      console.log(params)
+      getRailwayDestination(params).then(res => {
+        console.log(res, res.data)
+        if (res.code == 0) {
+          that.setData({
+            endArray: res.data.list
+          })
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    },
+    getLoadEmun() {
       var that = this
       getEmunList('land_route').then(res => {
         that.setData({
@@ -138,7 +191,7 @@ Component({
       })
     },
     // 集装箱类型
-    getBoxValue: function(e){
+    getBoxValue: function (e) {
       this.setData({
         boxTypeIndex: e.detail.sonParam
       })
@@ -163,7 +216,7 @@ Component({
         startSelected: e.detail.sonParam,
         loadEndArray: [that.data.startArray[e.detail.sonParam]]
       })
-      console.log(that.data.loadEndArray)
+      that.getDestination(that.data.startArray[e.detail.sonParam].value)
     },
     // 目的地
     getEndSelectValue(e) {
@@ -172,7 +225,7 @@ Component({
       })
     },
     // 陆运起始点
-    getLoadStartSelectValue(e){
+    getLoadStartSelectValue(e) {
       this.setData({
         loadStartIndex: e.detail.sonParam
       })
@@ -187,10 +240,10 @@ Component({
         return false
       }
       // 若包含国内运输，需先计算国内陆路价格
-      if(that.data.onLoadRadioChecked){
+      if (that.data.onLoadRadioChecked) {
         var params = {
           setting1: that.data.loadStartArray[that.data.loadStartIndex].value,
-          setting2: that.data.loadEndArray[0].value,
+          setting2: that.data.loadEndArray[0].to_station,
           setting3: that.data.box,
           setting4: that.data.boxTypeArray[that.data.boxTypeIndex].id,
         }
@@ -200,24 +253,24 @@ Component({
         console.log(params)
         postOrderInquiry('land_route', params).then(res => {
           console.log(res)
-          if(res.code == 0){
+          if (res.code == 0) {
             that.getPrice(res.data.total_price)
-          }else{
+          } else {
             wx.showToast({
               title: res.msg,
               icon: 'none'
             })
           }
         })
-      }else{
+      } else {
         that.getPrice()
       }
     },
-    getPrice: function(price){
+    getPrice: function (price) {
       var that = this
       var params = {
         setting1: that.data.startArray[that.data.startSelected].value,
-        setting2: that.data.endArray[that.data.endSelected].value,
+        setting2: that.data.endArray[that.data.endSelected].district_to,
         setting3: that.data.box,
         setting4: that.data.declearRadioChecked ? 2 : 1,
         setting5: that.data.amount,
@@ -230,15 +283,16 @@ Component({
       console.log(params)
       postOrderInquiry('railway', params).then(res => {
         console.log(res)
-        if(res.code == 0){
+        if (res.code == 0) {
           that.setData({
             "priceItem.totalPrice": res.data.total_price,
             "priceItem.rmbPrice": res.data.rmb_price,
             "priceItem.showOrderBtn": true,
+            "priceItem.showUnit": res.data.pay_unit,
             showShadow: true
           })
           wx.hideLoading()
-        }else{
+        } else {
           wx.showToast({
             title: res.msg,
             icon: 'none'
@@ -246,7 +300,7 @@ Component({
         }
       })
     },
-    order: function(){
+    order: function () {
       var that = this
       if (!that.data.box) {
         wx.showToast({
@@ -255,7 +309,7 @@ Component({
         })
         return false
       }
-      if(that.data.onLoadRadioChecked){
+      if (that.data.onLoadRadioChecked) {
         var params = {
           order_amount: that.data.priceItem.totalPrice,
           setting1: that.data.startArray[that.data.startSelected].id,
@@ -267,9 +321,9 @@ Component({
           setting7: that.data.boxTypeArray[that.data.boxTypeIndex].id,
           district_from: that.data.loadStartArray[that.data.loadStartIndex].value,
           nick_name: wx.getStorageSync('userInfo').nickName,
-          mobile: that.data.phone,
+          mobile: that.data.phone || wx.getStorageSync('phone'),
         }
-      }else{
+      } else {
         var params = {
           order_amount: that.data.priceItem.totalPrice,
           setting1: that.data.startArray[that.data.startSelected].id,
@@ -280,37 +334,53 @@ Component({
           setting6: 0,
           setting7: that.data.boxTypeArray[that.data.boxTypeIndex].id,
           nick_name: wx.getStorageSync('userInfo').nickName,
-          mobile: that.data.phone,
+          mobile: that.data.phone || wx.getStorageSync('phone'),
         }
       }
-      wx.showLoading({
-        title: '请等待',
-      })
-      postOrder('railway', params).then(res => {
-        console.log(res)
-        if(res.code == 0){
+      wx.requestSubscribeMessage({
+        tmplIds: ['4BlfpmT4MXeNSSqzo_CIqtLaiHAiByVRbzOx_ifnmQI'],
+        success(res) {
+
+        },
+        fail(err) {
           wx.showToast({
-            title: '下单成功',
-            icon: 'success',
+            title: err.errMsg,
+            icon: 'none',
             duration: 2000,
             mask: true,
-            success: function () {
-              setTimeout(function () {
-                //要延时执行的代码
-                wx.navigateTo({
-                  url: '../orderList/orderList?status=1',
-                })
-              }, 1000) //延迟时间
+          })
+        },
+        complete() {
+          wx.showLoading({
+            title: '请等待',
+          })
+          postOrder('railway', params).then(res => {
+            console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: '下单成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.navigateTo({
+                      url: '../orderList/orderList?status=1',
+                    })
+                  }, 1000) //延迟时间
+                }
+              })
+              that.setData({
+                showShadow: false,
+                "priceItem.showOrderBtn": false,
+              })
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
             }
-          })
-          that.setData({
-            showShadow: false,
-            "priceItem.showOrderBtn": false,
-          })
-        }else{
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
           })
         }
       })
@@ -331,6 +401,14 @@ Component({
           }
         }
       })
-    }
+    },
+    onShareAppMessage: async function () {
+      var that = this
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
+      }
+    },
   }
 })

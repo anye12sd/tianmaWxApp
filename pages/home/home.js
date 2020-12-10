@@ -89,6 +89,7 @@ Component({
         wx.navigateTo({
           url: '../' + page + '/' + page + '?status=' + orderType
         })
+        return false
       }
       wx.navigateTo({
         url: '../' + page + '/' + page

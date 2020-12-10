@@ -3,8 +3,8 @@
   <view class="flex-1 show-price">
     <view class="show-price-box">
       <text class="show-price-text">预估费用：</text>
-      <text wx:if="{{priceItem.rmbPrice}}" class="show-price-content">${{priceItem.totalPrice}}<text wx:if="{{priceItem.rmbPrice != '0.00'}}">+￥{{priceItem.rmbPrice}}</text></text>
-      <text wx:else class="show-price-content"><text wx:if="{{priceItem.flag == 6}}">$</text><text wx:else>￥</text>{{priceItem.totalPrice}}</text>
+      <text wx:if="{{priceItem.rmbPrice || priceItem.showUnit}}" class="show-price-content">${{priceItem.totalPrice}}<text wx:if="{{priceItem.rmbPrice != '0.00'}}">+￥{{priceItem.rmbPrice}}</text></text>
+      <text wx:else class="show-price-content">￥{{priceItem.totalPrice}}</text>
     </view>
     <text class="explain">{{priceItem.text}}</text>
   </view>

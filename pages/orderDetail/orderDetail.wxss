@@ -21,7 +21,7 @@ page{
   color: #333;
 }
 .check-price{
-  color: #376ee8;
+  color: #e60012;
 }
 .service-box{
   margin-top: 30rpx;

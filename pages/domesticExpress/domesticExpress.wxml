@@ -2,7 +2,11 @@
 <import src="../../component/model/model.wxml" />
 <view class="container" id="container">
   <view class="input-form">
-    <formInput dataList="{{expressSelect}}" selectArray="{{expressArray}}" bind:getSelectValue="getExpressValue">
+    <formInput dataList="{{expressQuery}}"  bind:getString="getExpressQuery">
+    </formInput>
+  </view>
+  <view class="input-form">
+    <formInput dataList="{{expressSelect}}" expressIndex="{{expressIndex}}" selectArray="{{expressArray}}" bind:getSelectValue="getExpressValue">
     </formInput>
   </view>
   <view class="input-form">
@@ -12,7 +16,7 @@
         <view class="infoText flex-1 infoText-placeholder picker" wx:if="{{showAddress == false}}" bindtap="translate">
           请选择
         </view>
-        <view class="infoText flex-1 picker" bindtap="translate" wx:else>{{city}} {{county}}</view>
+        <view class="infoText flex-1 picker" bindtap="translate" wx:else>{{city.length > 6 ? '' : city}} {{county}}</view>
       </view>
     </view>
     <!-- <addresser addressList="{{senderAddressList}}" bindtap="senderAddressSelect" showAddressSelect="{{showAddressSelect}}"></addresser> -->
@@ -22,10 +26,21 @@
   </view>
   <view class="input-form">
     <formInput dataList="{{weightList}}" bind:getValue="getWeight"></formInput>
+    <block wx:if="{{showVolume}}">
+      <view class="divider"></view>
+      <formInput dataList="{{lengthList}}" bind:getValue="getLength"></formInput>
+      <view class="divider"></view>
+      <formInput dataList="{{wideList}}" bind:getValue="getWide"></formInput>
+      <view class="divider"></view>
+      <formInput dataList="{{heightList}}" bind:getValue="getHeight"></formInput>
+    </block>
     <!-- <view class="divider"></view>
     <formInput dataList="{{numberList}}" bind:getValue="getNumber"></formInput> -->
     <!-- <view class="divider"></view>
     <formInput dataList="{{volumeList}}" bind:getValue="getVloume"></formInput> -->
+  </view>
+  <view class="input-form">
+    <view class="car-desc" wx-if="{{expressArray[expressIndex].desc}}">{{expressArray[expressIndex].desc}}</view>
   </view>
   <view class="price-list-box" wx:if="{{queryPrice.length}}">
     <view class="flex flex-wrap price-list">
@@ -42,8 +57,10 @@
     </block>
   </view>
   <view class="addNewAddress">
-    <button wx:if="{{hasPhoneNum}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="order-btn">询价</button>
+    <button wx:if="{{hasPhoneNum}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"
+      class="order-btn">询价</button>
     <text wx:else bindtap="getOrderPrice">{{queryPrice.length ? '重新询价' : '询价'}}</text>
   </view>
   <template is="areaData" data="{{...item}}" />
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>

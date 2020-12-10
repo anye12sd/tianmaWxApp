@@ -18,8 +18,8 @@ page{
   margin: 0 30rpx
 }
 .active{
-  border-bottom: 2px solid #376ee8;
-  color: #376ee8;
+  border-bottom: 2px solid #e60012;
+  color: #e60012;
 }
 .article-children-title-box{
   background: #fff;
@@ -63,6 +63,7 @@ page{
 }
 .article{
   padding: 30rpx;
+  text-align: justify;
 }
 
 .swiper-box{
@@ -120,6 +121,6 @@ page{
 .dot.active {
   width: 32rpx;
   height: 16rpx;
-  background-color: #376ee8;
+  background-color: #e60012;
   border-radius: 15px;
 }

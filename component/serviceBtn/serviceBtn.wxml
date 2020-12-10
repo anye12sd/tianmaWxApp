@@ -1,0 +1,31 @@
+<!--component/serviceBtn/serviceBtn.wxml-->
+<view class="menu-box">
+  <view class="navbar {{ play?'active':'' }}">
+    <view class="btn" bindtap="changePlay">
+      <view class="line" style="opacity: 0" animation="{{ !play?line1CloseAn:line1OpenAn }}"></view>
+      <view class="line" style="opacity: 0" animation="{{ !play?line2CloseAn:line2OpenAn }}"></view>
+      <!-- <view class="title" animation="{{ !play?titleCloseAn:titleOpenAn }}">
+        客服
+      </view> -->
+      <view class="img-box" animation="{{ !play?titleCloseAn:titleOpenAn }}"><image class="img" src="../../img/serviceBtn.png" alt=""></image></view>
+    </view>
+  </view>
+  <view class="menu">
+    <!-- <view animation="{{ !play?btn4Close:btn4Open }}">
+      <text>我的</text>
+    </view>
+    <view animation="{{ !play?btn3Close:btn3Open }}">
+      <text>购物</text>
+    </view> -->
+    <view animation="{{ !play?btn2Close:btn2Open }}">
+      <button bindtap="tel" class="phone-num">
+        电话
+      </button>
+    </view>
+    <view animation="{{ !play?btn1Close:btn1Open }}">
+      <button open-type="contact" class="service-button">
+        客服
+      </button>
+    </view>
+  </view>
+</view>

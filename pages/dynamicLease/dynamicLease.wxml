@@ -1,6 +1,9 @@
 <!--pages/dynamicLease/dynamicLease.wxml-->
 <view class="container">
   <view class="input-form">
+    <formInput dataList="{{computedSelect}}" selectArray="{{computedArray}}" bind:getSelectValue="getcomputedValue"></formInput>
+  </view>
+  <view class="input-form">
     <!-- <view class="input-box flex">
       <view class="input-box-label flex-1 has-bottom">预计日估存储面积</view>
       <view class="input-right-box flex-1 has-bottom">
@@ -12,6 +15,16 @@
     <formInput dataList="{{squareList}}" bind:getValue="getSquare"></formInput>
     <view class="divider"></view>
     <formInput dataList="{{deliverAmountList}}" bind:getValue="getDeliverAmount"></formInput>
+  </view>
+  <view class="input-form">
+    <view class="input-form-explain">以下数据为单件货物数据</view>
+    <formInput dataList="{{weightList}}" bind:getValue="getWeight"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{lengthList}}" bind:getValue="getLength"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{wideList}}" bind:getValue="getWide"></formInput>
+    <view class="divider"></view>
+    <formInput dataList="{{heightList}}" bind:getValue="getHeight"></formInput>
   </view>
   <view class="input-form">
     <formInput dataList="{{hasService}}" bind:getRadioValue="getRadioValue"></formInput>
@@ -26,7 +39,7 @@
     <!-- <view class="input-box flex">
       <view class="input-box-label flex-1 has-bottom">是否包含操作服务</view>
       <view class="input-right-box flex-1 input-right-radio-box has-bottom">
-        <radio value="r1" checked="{{radioChecked}}" color="#376ee8" class="input-right-radio" bindtap="toggleRadioCheck"/>
+        <radio value="r1" checked="{{radioChecked}}" color="#e60012" class="input-right-radio" bindtap="toggleRadioCheck"/>
       </view>
     </view> -->
     <!-- <view class="input-box flex">
@@ -57,4 +70,5 @@
     </view> -->
   </view>
   <view class="shadow" wx:if="{{showShadow}}" bindtap="showReOrder"></view>
+  <serviceBtn tel="{{tel}}"></serviceBtn>
 </view>

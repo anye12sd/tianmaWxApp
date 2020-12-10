@@ -1,7 +1,7 @@
 /* pages/seaFreight/seaFreight.wxss */
 .container{
   background: #f9f9f9;
-  padding-bottom: 260rpx;
+  padding-bottom: 200rpx;
 }
 .car-desc{
   padding: 0 60rpx;

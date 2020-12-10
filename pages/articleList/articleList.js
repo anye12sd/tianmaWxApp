@@ -12,6 +12,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    share_img: "",
     background: [],
     autoplay: false,
     interval: 2000,
@@ -32,6 +33,9 @@ Component({
   methods: {
     onLoad: function(){
       var that = this;
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       that.data.articleList.length ? console.log(1) : that.getArticleList()
     },
     // onLoad: function(){
@@ -44,7 +48,7 @@ Component({
         title: '加载中',
       })
       getArticleList("").then(res => {
-        console.log(res)
+        // console.log(res)
         if(res.code == 0){
           that.setData({
             articleList: res.data.list,
@@ -66,7 +70,7 @@ Component({
     getArticleDetail: function(id){
       var that = this
       getArticleList(id).then(res => {
-        console.log(res)
+        // console.log(res)
         if(res.code == 0){
           that.setData({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
@@ -90,7 +94,7 @@ Component({
       })
       var id = e.currentTarget.dataset.id
       getArticleList(id).then(res => {
-        console.log(res)
+        // console.log(res)
         if(res.code == 0){
           that.setData({
             articleChildrenList: res.data[0].children ? res.data[0].children : [],
@@ -111,6 +115,14 @@ Component({
       wx.navigateTo({
         url: '../article/article?id=' + id,
       })
-    }
+    },
+    onShareAppMessage: async function () {
+      var that = this
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
+      }
+    },
   }
 })

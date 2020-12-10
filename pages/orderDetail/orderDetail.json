@@ -1,9 +1,10 @@
 {
   "component": true,
   "usingComponents": {
-    "addresser": "../../component/addresser/addresser"
+    "addresser": "../../component/addresser/addresser",
+    "serviceBtn": "../../component/serviceBtn/serviceBtn"
   },
-  "navigationBarBackgroundColor": "#376ee8",
+  "navigationBarBackgroundColor": "#e60012",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "询价详情",
   "backgroundColor": "#f9f9f9",

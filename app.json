@@ -1,14 +1,14 @@
 {
   "pages":[
-    "pages/domesticExpress/domesticExpress",
     "pages/ad/ad",
+    "pages/railway/railway",
+    "pages/orderList/orderList",
+    "pages/domesticExpress/domesticExpress",
     "pages/index/index",
-    
     "pages/articleList/articleList",
     "pages/article/article",
     "pages/feedback/feedback",
     "pages/home/home",
-    "pages/orderList/orderList",
     "pages/orderDetail/orderDetail",
     "pages/login/login",
     "pages/netExpress/netExpress",
@@ -21,7 +21,6 @@
     "pages/declaration/declaration",
     "pages/seaFreight/seaFreight",
     "pages/domesticLand/domesticLand",
-    "pages/railway/railway",
     "pages/airFreight/airFreight",
     "pages/logs/logs"
   ],
@@ -38,7 +37,7 @@
     "backgroundColor": "#f9f9f9"
   },
   "tabBar": {
-    "selectedColor": "#376ee8",
+    "selectedColor": "#e60012",
     "color": "#ccc",
     "borderStyle": "white",
     "list": [

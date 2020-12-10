@@ -2,7 +2,8 @@
 const {
   getEmunList,
   postOrderInquiry,
-  postOrder
+  postOrder,
+  getTelephone
 } = require('../../http/api.js');
 const amapFile = require('../../libs/amap-wx.js');
 Component({
@@ -17,6 +18,8 @@ Component({
    * 组件的初始数据
    */
   data: {
+    share_img: "",
+    tel: "",
     car: 0,
     filter: 0,
     hasPhoneNum: "",
@@ -29,7 +32,11 @@ Component({
     weightMax: 0,
     volumeMax: 0,
     newCarArray: [],
-    filterArray: [{value: "按载重"}, {value: "按体积"}],
+    filterArray: [{
+      value: "按载重"
+    }, {
+      value: "按体积"
+    }],
     carSelect: {
       "label": "车型",
       "isSelect": true
@@ -49,19 +56,19 @@ Component({
       "address": "这是收货地址",
     },
     weightList: {
-      label: "装车重量",
-      placeholder: "0 吨",
+      label: "装车重量（T）",
+      placeholder: "0",
       isInput: true
     },
     volumeList: {
-      label: "装车体积",
-      placeholder: "0 立方",
+      label: "装车体积（m³）",
+      placeholder: "0",
       isInput: true
     },
     priceItem: {
       totalPrice: "--",
       showOrderBtn: false,
-      text: "本费用为预估费用，仅供参考"
+      text: "本费用已含税，为预估费用，仅供参考"
     },
     markers: [{
       iconPath: "../../img/mapicon_navi_s.png",
@@ -86,6 +93,9 @@ Component({
   methods: {
     onShow: function () {
       var that = this
+      that.setData({
+        'share_img': wx.getStorageSync('share_img')
+      })
       const phone = wx.getStorageSync('phone') ? wx.getStorageSync('phone') : ""
       console.log(phone)
       if (!phone) {
@@ -99,10 +109,31 @@ Component({
           phone: phone
         })
       }
-      if(!that.data.carArray.length){
+      if (!that.data.carArray.length) {
         that.getEmun()
       }
       that.checkSelectedAddress()
+      that.getTel()
+    },
+    getTel() {
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+      })
+      getTelephone('network_freight').then(res => {
+        console.log(res)
+        if (res.code == 0) {
+          that.setData({
+            tel: res.data.kefu_telephone
+          })
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
     },
     getEmun() {
       var that = this
@@ -113,18 +144,20 @@ Component({
         // console.log(res)
         if (res.code == 0) {
           var car = res.data.list[0].values
-          car.unshift({value: '请选择'})
+          car.unshift({
+            value: '请选择'
+          })
           that.setData({
             'carSelect.label': res.data.list[0].name,
             carArray: car,
             newCarArray: car,
             // 获取车载重量最大值
-            weightMax: Math.max.apply(Math, car.map(function(item) {
-              return item.weight << 0 
+            weightMax: Math.max.apply(Math, car.map(function (item) {
+              return item.weight << 0
             })),
             // 获取车载体积最大值
-            volumeMax: Math.max.apply(Math, car.map(function(item) {
-              return item.volume << 0 
+            volumeMax: Math.max.apply(Math, car.map(function (item) {
+              return item.volume << 0
             }))
           })
           console.log(car)
@@ -182,25 +215,25 @@ Component({
     },
     getVolume: function (e) {
       // 筛选体积大于装车体积的车辆，如果没有，返回最大体积车辆
-      let newArray = this.data.carArray.filter(item => item.volume > e.detail.sonParam )
-      if(e.detail.sonParam > this.data.volumeMax){
-        newArray = this.data.carArray.filter(item => item.volume == this.data.volumeMax )
+      let newArray = this.data.carArray.filter(item => item.volume > e.detail.sonParam)
+      if (e.detail.sonParam >= this.data.volumeMax) {
+        newArray = this.data.carArray.filter(item => item.volume == this.data.volumeMax)
       }
       this.setData({
         volume: e.detail.sonParam,
-        newCarArray: newArray, 
+        newCarArray: newArray,
         car: 0
       })
     },
-    getWeight: function (e) {    
+    getWeight: function (e) {
       // 筛选载重大于装车重量的车辆，如果没有，返回最大载重车辆
-      let newArray = this.data.carArray.filter(item => item.weight > e.detail.sonParam )
-      if(e.detail.sonParam > this.data.weightMax){
-        newArray = this.data.carArray.filter(item => item.weight == this.data.weightMax )
+      let newArray = this.data.carArray.filter(item => item.weight > e.detail.sonParam)
+      if (e.detail.sonParam >= this.data.weightMax) {
+        newArray = this.data.carArray.filter(item => item.weight == this.data.weightMax)
       }
       this.setData({
         weight: e.detail.sonParam,
-        newCarArray: newArray, 
+        newCarArray: newArray,
         car: 0
       })
     },
@@ -225,15 +258,113 @@ Component({
       that.getLocation(that.data.senderAddressList.address, "sender")
       that.getLocation(that.data.receiverAddressList.address, "receiver")
     },
-    getLocation: function (address, type) {
+    getOrder: function () {
       var that = this
-      if(!that.data.newCarArray[that.data.car].id){
+      if (!that.data.newCarArray[that.data.car].id) {
         wx.showToast({
           title: '请选择车型',
           icon: 'none'
         })
         return false
       }
+      let distance = [Math.round(parseFloat(that.data.distance) * 0.001), Math.round(parseFloat(that.data.distance) * 0.001) + 30]
+      var params = {
+        setting1: Math.round(parseFloat(that.data.distance) * 0.001),
+        setting2: that.data.newCarArray[that.data.car].id,
+      }
+      wx.showLoading({
+        title: '请等待',
+      })
+      console.log(params)
+      postOrderInquiry('network_freight', params).then(res => {
+        console.log(res)
+        if (res.code == 0) {
+          that.setData({
+            showShadow: true,
+            "priceItem.totalPrice": res.data.price,
+            "priceItem.showOrderBtn": true,
+          })
+          wx.hideLoading()
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    },
+    order: function () {
+      var that = this
+      var params = {
+        order_amount: that.data.priceItem.totalPrice,
+        setting1: parseFloat(that.data.distance) * 0.001,
+        setting2: that.data.newCarArray[that.data.car].id,
+        setting3: that.data.senderAddressList.address,
+        setting4: that.data.receiverAddressList.address,
+        nick_name: wx.getStorageSync('userInfo').nickName,
+        mobile: that.data.phone || wx.getStorageSync('phone'),
+      }
+      console.log(params)
+      wx.requestSubscribeMessage({
+        tmplIds: ['4BlfpmT4MXeNSSqzo_CIqtLaiHAiByVRbzOx_ifnmQI'],
+        success(res) {
+
+        },
+        fail(err) {
+          wx.showToast({
+            title: err.errMsg,
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+          })
+        },
+        complete() {
+          wx.showLoading({
+            title: '请等待',
+          })
+          postOrder('network_freight', params).then(res => {
+            console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: '下单成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.navigateTo({
+                      url: '../orderList/orderList?status=1',
+                    })
+                  }, 1000) //延迟时间
+                }
+              })
+              that.setData({
+                showShadow: false,
+                "priceItem.showOrderBtn": false,
+              })
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
+          })
+        }
+      })
+    },
+    getLocation: function (address, type) {
+      var that = this
+      if (!that.data.newCarArray[that.data.car].id) {
+        wx.showToast({
+          title: '请选择车型',
+          icon: 'none'
+        })
+        return false
+      }
+      wx.showLoading({
+        title: '地图加载中',
+      })
       wx.request({
         url: 'https://restapi.amap.com/v3/geocode/geo?address=' + address + '&output=JSON&key=25d11906d5f5421fc88e01cc52576119',
         header: {
@@ -305,7 +436,10 @@ Component({
             that.setData({
               distance: data.paths[0].distance + '米'
             });
-            that.getOrder()
+            // 延迟800ms后执行确保获取distance
+            setTimeout(function(){
+              that.getOrder()
+            }, 800)
           } else {
             wx.showToast({
               title: '未获取到距离',
@@ -325,85 +459,17 @@ Component({
           })
         }
       })
-    },
-    getOrder: function () {
-      var that = this
-      if(!that.data.newCarArray[that.data.car].id){
-        wx.showToast({
-          title: '请选择车型',
-          icon: 'none'
-        })
-        return false
-      }
-      let distance = [Math.round(parseFloat(that.data.distance) * 0.001),Math.round(parseFloat(that.data.distance) * 0.001) + 30]
-      var params = {
-        setting1: Math.round(parseFloat(that.data.distance) * 0.001),
-        setting2: that.data.newCarArray[that.data.car].id,
-      }
-      wx.showLoading({
-        title: '请等待',
-      })
-      console.log(params)
-      postOrderInquiry('network_freight', params).then(res => {
-        console.log(res)
-        if (res.code == 0) {
-          that.setData({
-            showShadow: true,
-            "priceItem.totalPrice": res.data.price,
-            "priceItem.showOrderBtn": true,
-          })
-          wx.hideLoading()
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
-        }
+      wx.hideLoading({
+
       })
     },
-    order: function () {
+    onShareAppMessage: async function () {
       var that = this
-      var params = {
-        order_amount: that.data.priceItem.totalPrice,
-        setting1: parseFloat(that.data.distance) * 0.001,
-        setting2: that.data.newCarArray[that.data.car].id,
-        setting3: that.data.senderAddressList.address,
-        setting4: that.data.receiverAddressList.address,
-        nick_name: wx.getStorageSync('userInfo').nickName,
-        mobile: that.data.phone,
+      return {
+        title: '宏伟天马物流',
+        path: `/pages/ad/ad`,
+        imageUrl: that.data.share_img
       }
-      wx.showLoading({
-        title: '请等待',
-      })
-      console.log(params)
-      postOrder('network_freight', params).then(res => {
-        console.log(res)
-        if (res.code == 0) {
-          wx.showToast({
-            title: '下单成功',
-            icon: 'success',
-            duration: 2000,
-            mask: true,
-            success: function () {
-              setTimeout(function () {
-                //要延时执行的代码
-                wx.navigateTo({
-                  url: '../orderList/orderList?status=1',
-                })
-              }, 1000) //延迟时间
-            }
-          })
-          that.setData({
-            showShadow: false,
-            "priceItem.showOrderBtn": false,
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
-        }
-      })
     },
   }
 })

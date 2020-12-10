@@ -1,11 +1,10 @@
 /* pages/dynamicLease/dynamicLease.wxss */
 page{
-  height: 100%;
   background: #f9f9f9;
 }
 .container{
-  height: 100%;
   background: #f9f9f9;
+  padding-bottom: 260rpx;
 }
 .input-form{
   width: 100%;
@@ -79,7 +78,7 @@ page{
   padding-top: 40rpx;
 }
 .show-price-content{
-  color: #376ee8;
+  color: #e60012;
 }
 .explain{
   position: absolute;
@@ -96,7 +95,7 @@ page{
   height: 80rpx;
   line-height: 80rpx;
   color:#fff;
-  background: #376ee8;
+  background: #e60012;
   border-radius: 8rpx;
 }
 .explain{
@@ -104,4 +103,9 @@ page{
   padding:0 60rpx;
   font-size: 30rpx;
   margin-top: 20rpx;
+}
+.input-form-explain{
+  padding: 0 60rpx;
+  padding-bottom: 20rpx;
+  font-size: 30rpx;
 }

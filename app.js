@@ -1,18 +1,37 @@
+const {
+  getShareImg
+} = require('./http/api.js');
 //app.js
 App({
   onLaunch: function () {
     // 展示本地存储能力
     var that = this;
+    // 获取分享封面图存在stroage里面
+    getShareImg().then(res => {
+      wx.showLoading({
+        title: '请等待',
+      })
+      console.log(res)
+      if (res.code == 0) {
+        wx.setStorageSync('share_img', res.data)
+        wx.hideLoading()
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {

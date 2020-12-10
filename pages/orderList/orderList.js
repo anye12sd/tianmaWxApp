@@ -50,6 +50,7 @@ Component({
         },
       })
       that.getOrder()
+      that.pageScrollToBottom()
     },
     setTitle: function (status) {
       switch (status) {
@@ -86,7 +87,7 @@ Component({
           totalPage: res.data.total_page,
           freshFlag: true
         })
-        if(res.data.total == 0){
+        if (res.data.total == 0) {
           wx.showToast({
             title: '暂无订单',
             icon: 'none',
@@ -147,7 +148,7 @@ Component({
       var that = this
       // console.log(e)
       // console.log(that.data.allHeight, that.data.clientHight)
-      if (that.data.allHeight - that.data.clientHight <= (e.scrollTop + 1)) { // 判断是否滚动动到底部
+      if (that.data.allHeight - that.data.clientHight <= (e.scrollTop + 2)) { // 判断是否滚动动到底部
         console.log("到底了")
         if (!that.data.noMore && that.data.freshFlag) {
           const page = that.data.page + 1
@@ -197,12 +198,27 @@ Component({
         }
       })
     },
-    toOrderDetail: function(e){
+    toOrderDetail: function (e) {
       var that = this
       var orderId = e.currentTarget.dataset.orderid
       wx.navigateTo({
         url: '../orderDetail/orderDetail?orderId=' + orderId,
       })
-    }
+    },
+    copyText: function (e) {
+      console.log(e)
+      wx.setClipboardData({
+        data: e.currentTarget.dataset.text,
+        success: function (res) {
+          wx.getClipboardData({
+            success: function (res) {
+              wx.showToast({
+                title: '复制成功'
+              })
+            }
+          })
+        }
+      })
+    },
   }
 })

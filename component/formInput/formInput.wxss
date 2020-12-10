@@ -34,6 +34,12 @@
   font-weight: bold;
   text-align: center;
 }
+.input-right-noComputed-input{
+  width: 100%;
+  text-align: right;
+  font-weight: normal;
+  font-size: 30rpx;
+}
 .input-right-radio-box{
   text-align: right;
 }

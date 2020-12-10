@@ -15,7 +15,7 @@ module.exports = {
     const token = wx.getStorageSync('token') ? wx.getStorageSync('token') : ""
     return new Promise((resolve, reject) => {
       console.log('url请求', baseUrl, url);
-      if(url != '/login' && url != '/layout' && url !='/cover' && url !='/banner' && url.indexOf('/article/') == '-1' && !token){
+      if(url != '/share_img' && url != '/login' && url != '/layout' && url !='/cover' && url !='/banner' && url.indexOf('/article/') == '-1' && !token){
         wx.showToast({
           title: "请先登录",
           icon: 'none', //图标，支持"success"、"loading" 

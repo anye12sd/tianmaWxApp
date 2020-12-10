@@ -38,7 +38,7 @@
 }
 .receive::before{
   content: "收";
-  background: #376ee8;
+  background: #e60012;
 }
 .address{
   color: #969696;

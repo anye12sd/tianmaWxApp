@@ -86,13 +86,16 @@
 /*用来包裹所有的小圆点  */
 
 .dots {
-  width: 156rpx;
   height: 36rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20rpx;
   display: flex;
   flex-direction: row;
-  position: absolute;
-  left: 320rpx;
-  bottom: 20rpx;
+}
+.dots-box{
+  margin: 0 auto;
 }
 
 /*未选中时的小圆点样式 */
@@ -110,7 +113,7 @@
 .active {
   width: 32rpx;
   height: 16rpx;
-  background-color: #376ee8;
+  background-color: #e60012;
   border-radius: 15px;
 }
 
@@ -135,7 +138,7 @@
   bottom:0;
   left:0;
   right:0;
-  background: #376ee8;
+  background: #e60012;
   color:#fff;
   height: 50rpx;
   line-height: 50rpx;
@@ -158,12 +161,22 @@
   width: calc(50% - 98rpx);
   padding: 40rpx;
   background: #fff;
-  border-radius: 8px
+  border-radius: 8px;
+  position: relative;
 }
 .deliver-way-subText{
   font-size: 22rpx;
-  color:#ccc;
+  color:#b4b4b4;
   margin-top: 8rpx;
+}
+.deliver-way-bottom{
+  height: 10rpx;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 8px 8px;
+  left: 0;
+  background: #e60012;
 }
 .deliver-way-text image{
   width:70rpx;
@@ -173,11 +186,33 @@
 }
 .deliver-way-last{
   position: relative;
+  height: 120rpx;
+  padding: 0
 }
 .deliver-way-last image{
   position: absolute;
   width: 70rpx;
   height: 70rpx;
-  right: 60rpx;
-  top: 45rpx
+  left: 40rpx;
+  top: 24rpx
+}
+.deliver-way-last .deliver-way-text{
+  position: absolute;
+  left: 128rpx;
+  top: 36rpx
+}
+.deliver-way-last .deliver-way-subText{
+  position: absolute;
+  left: 206rpx;
+  top: 36rpx
+}
+.index-order-btn{
+  color: #fff;
+  background: #ff8922;
+  padding: 6rpx 20rpx;
+  border-radius: 5px;
+  position: absolute;
+  font-size: 28rpx;
+  right: 50rpx;
+  top: 32rpx
 }

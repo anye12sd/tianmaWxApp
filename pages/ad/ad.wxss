@@ -34,14 +34,16 @@
 /*用来包裹所有的小圆点  */
 
 .dots {
-  width: 156rpx;
   height: 36rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20rpx;
   display: flex;
   flex-direction: row;
-  position: absolute;
-  left: 320rpx;
-  bottom: 20rpx;
-  z-index: 12;
+}
+.dots-box{
+  margin: 0 auto;
 }
 
 /*未选中时的小圆点样式 */
@@ -51,7 +53,7 @@
   height: 16rpx;
   border-radius: 50%;
   margin-right: 16rpx;
-  background-color: #fff;
+  background-color: white;
 }
 
 /*选中以后的小圆点样式  */
@@ -59,6 +61,6 @@
 .active {
   width: 32rpx;
   height: 16rpx;
-  background-color: #376ee8;
+  background-color: #e60012;
   border-radius: 15px;
 }

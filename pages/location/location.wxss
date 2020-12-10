@@ -69,7 +69,7 @@ page{
 }
 .reLocation{
   float: right;
-  color: #376ee8;
+  color: #e60012;
   font-size: 28rpx;
   padding-right: 40rpx;
   line-height: 78rpx;
