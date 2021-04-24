@@ -52,7 +52,7 @@
     <view class="flex flex-wrap order-detail-box">
       <text>预估费用</text>
       <block wx:if="{{orderDetailList.order_type == 5 || orderDetailList.order_type == 7 || orderDetailList.order_type == 6}}">
-        <text class="check-price" wx:if="{{orderDetailList.rmb_price}}">$ {{orderDetailList.order_amount}} +￥{{orderDetailList.rmb_price}}</text>
+        <text class="check-price" wx:if="{{orderDetailList.rmb_price}}">{{orderDetailList.pay_type == '￥' ? '￥' : '$'}} {{orderDetailList.order_amount}} +￥{{orderDetailList.rmb_price}}</text>
         <text class="check-price" wx:else>$ {{orderDetailList.order_amount}}</text>
       </block>
       <block wx:else>

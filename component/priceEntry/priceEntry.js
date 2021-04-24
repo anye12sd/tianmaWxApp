@@ -32,32 +32,32 @@ Component({
       this.triggerEvent('order')
     },
     getPhoneNumber(e) {
-        wx.checkSession({
-          success () {
-            //session_key 未过期，并且在本生命周期一直有效
-            console.log('session_key 未过期')
-          },
-          fail () {
-            // session_key 已经失效，需要重新执行登录流程
-            console.log('session_key 已经失效')
-            wx.showToast({
-              title: "状态失效请重新登录",
-              icon: 'none', //图标，支持"success"、"loading" 
-              duration: 2000, //提示的延迟时间，单位毫秒，默认：1500 
-              mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false 
-              success: function () {
-                setTimeout(function () {
-                  //要延时执行的代码
-                  wx.redirectTo({
-                    url: '../login/login'
-                  })
-                }, 1000) //延迟时间
-              }
-            })
-            return false
-          }
-        })
-      console.log(e)
+      //   wx.checkSession({
+      //     success () {
+      //       //session_key 未过期，并且在本生命周期一直有效
+      //       console.log('session_key 未过期')
+      //     },
+      //     fail () {
+      //       // session_key 已经失效，需要重新执行登录流程
+      //       console.log('session_key 已经失效')
+      //       wx.showToast({
+      //         title: "状态失效请重新登录",
+      //         icon: 'none', //图标，支持"success"、"loading" 
+      //         duration: 2000, //提示的延迟时间，单位毫秒，默认：1500 
+      //         mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false 
+      //         success: function () {
+      //           setTimeout(function () {
+      //             //要延时执行的代码
+      //             wx.redirectTo({
+      //               url: '../login/login'
+      //             })
+      //           }, 1000) //延迟时间
+      //         }
+      //       })
+      //       return false
+      //     }
+      //   })
+      // console.log(e)
       var that = this
       var code
       wx.login({
@@ -99,7 +99,21 @@ Component({
                   })
                   that.triggerEvent('getOrderPrice')
                   wx.hideLoading()
-                } else {
+                } else if(res.code == '-2') {
+                  wx.showToast({
+                    title: '登录状态失效，请重新登录',
+                    icon: 'none',
+                    duration: 1500,
+                    success: function () {
+                      setTimeout(function () {
+                        //要延时执行的代码
+                        wx.redirectTo({
+                          url: '../login/login'
+                        })
+                      }, 1500) //延迟时间
+                    }
+                  })
+                }else {
                   wx.showToast({
                     title: res.msg,
                     icon: 'none'

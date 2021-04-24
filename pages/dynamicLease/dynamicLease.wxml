@@ -15,6 +15,10 @@
     <formInput dataList="{{squareList}}" bind:getValue="getSquare"></formInput>
     <view class="divider"></view>
     <formInput dataList="{{deliverAmountList}}" bind:getValue="getDeliverAmount"></formInput>
+    <block wx:if="{{showDayVolumn}}">
+      <view class="divider"></view>
+      <formInput dataList="{{dayVolumnList}}" bind:getValue="getDayVolumn"></formInput>
+    </block>
   </view>
   <view class="input-form">
     <view class="input-form-explain">以下数据为单件货物数据</view>

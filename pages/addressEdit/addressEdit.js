@@ -184,7 +184,7 @@ Component({
         is_default: setDefault
       }
       putEditAddress(id, params).then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.code === 0) {
           wx.showToast({
             title: "编辑成功",

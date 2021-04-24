@@ -1,8 +1,29 @@
 const {
-  getShareImg
+  getShareImg, login
 } = require('./http/api.js');
 //app.js
 App({
+  onShow: function(){
+    wx.checkSession({
+      success() {
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail() {
+        // session_key 已经失效，需要重新执行登录流程
+        wx.removeStorageSync('token')
+        wx.login({
+          success: res => {
+            const data = {
+              code: res.code,
+            }
+            login(data).then(res => {
+              console.log(res)
+            })
+          }
+        })
+      }
+    })
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var that = this;
@@ -30,6 +51,7 @@ App({
     // wx.login({
     //   success: res => {
     //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     console.log(res)
     //   }
     // })
     // 获取用户信息

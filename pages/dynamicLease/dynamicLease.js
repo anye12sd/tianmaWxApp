@@ -23,7 +23,9 @@ Component({
     tel: "",
     index: 0,
     computedIndex: 0,
+    showDayVolumn: false,
     radioChecked: false,
+    dayVolumn: "",
     square: "",
     weight: "",
     volume: "",
@@ -79,6 +81,12 @@ Component({
     },
     deliverAmountList: {
       label: "预计日均发货数量（件）",
+      placeholder: "0",
+      category: "deliverAmount",
+      isInput: true
+    },
+    dayVolumnList: {
+      label: "预估日平均库存（件）",
       placeholder: "0",
       category: "deliverAmount",
       isInput: true
@@ -149,7 +157,7 @@ Component({
         title: '加载中',
       })
       getEmunList('dynamic_lease').then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.code == 0) {
           that.setData({
             'deliverWayList.label': res.data.list[0].name,
@@ -176,6 +184,15 @@ Component({
       this.setData({
         computedIndex: e.detail.sonParam
       })
+      if(this.data.computedArray[this.data.computedIndex].id == 2){
+        this.setData({
+          showDayVolumn: true
+        })
+      }else{
+        this.setData({
+          showDayVolumn: false
+        })
+      }
     },
     getRadioValue: function (e) {
       this.setData({
@@ -185,6 +202,11 @@ Component({
     getSquare: function (e) {
       this.setData({
         square: e.detail.sonParam
+      })
+    },
+    getDayVolumn: function (e) {
+      this.setData({
+        dayVolumn: e.detail.sonParam
       })
     },
     // 长
@@ -237,10 +259,18 @@ Component({
         })
         return false
       }
+      if(that.data.showDayVolumn && !that.data.dayVolumn){
+        wx.showToast({
+          title: '请先完善表单',
+          icon: 'none'
+        })
+        return false
+      }
       var params = {
         setting1: that.data.square,
         setting2: that.data.deliverAmount,
         setting3: that.data.computedArray[that.data.computedIndex].id,
+        setting4: that.data.dayVolumn,
       }
       // console.log(params)
       wx.showLoading({
@@ -272,6 +302,13 @@ Component({
         })
         return false
       }
+      if(that.data.showDayVolumn && !that.data.dayVolumn){
+        wx.showToast({
+          title: '请先完善表单',
+          icon: 'none'
+        })
+        return false
+      }
       var params = {
         order_amount: that.data.priceItem.totalPrice,
         setting1: that.data.square,
@@ -281,6 +318,7 @@ Component({
         setting5: that.data.computedArray[that.data.computedIndex].id,
         setting6: that.data.weight,
         setting7: parseFloat(parseFloat(that.data.length * that.data.wide * that.data.height).toFixed(2)),
+        setting8: that.data.dayVolumn,
         size: that.data.length + "," + that.data.wide + "," + that.data.height,
         nick_name: wx.getStorageSync('userInfo').nickName,
         mobile: that.data.phone || wx.getStorageSync('phone'),

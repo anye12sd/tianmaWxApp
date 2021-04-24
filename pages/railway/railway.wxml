@@ -9,7 +9,7 @@
     <formInput dataList="{{boxTypeList}}" selectArray="{{boxTypeArray}}" bind:getSelectValue="getBoxValue"></formInput>
     <view class="car-desc" wx-if="{{boxTypeArray[boxTypeIndex].desc}}">{{boxTypeArray[boxTypeIndex].desc}}</view>
     <view class="car-img-box" wx-if="{{boxTypeArray[boxTypeIndex].pic}}">
-      <image class="car-img" src="{{boxTypeArray[boxTypeIndex].pic}} + '!/both/800x520'"></image>
+      <image class="car-img" src="{{boxTypeArray[boxTypeIndex].pic}}"></image>
     </view>
   </view>
   <view class="input-form">

@@ -6,10 +6,10 @@ module.exports={
   },
   //测试环境
   test:{
-    baseUrl:""
+    baseUrl:"http://42.192.209.104/tianma_app/wxapp"
   },
   //线上url
   prod:{
-    baseUrl:"https://api.jihui88.net/tmapi/tianma_app/wxapp"
+    baseUrl:"https://tm.nuclearmall.com/tianma_app/wxapp/"
   }
 } 
